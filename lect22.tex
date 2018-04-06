@@ -1,0 +1,63 @@
+\section{The Simple Symmetric Random Walk}
+$\left\{ X_n \right\}_{n=1}^\infty$ IID random vectors distributed as
+\begin{itemize}
+	\item $d=1$: $X^1_n \sim Ber\left(\frac{1}{2}\right)$ $$P\left(X^1_n = 1\right)=P\left(X^1_n = -1\right)=\frac{1}{2}$$
+	\item $d\geq 2$ $$P(X^d_n = -e_j) = P(X^d_n = e_j) = \frac{1}{2d}$$
+\end{itemize}
+
+Denote $$S^d_0 =\vec{0}\in \mathbb{Z}_d$$ and $$S^d_n = \sum_{j=1}^n X^d_j$$
+Then $\left\{  S^d_n \right\}_{n=0}^\infty$ is $d$-dimensional SSRW.
+
+\paragraph{}
+Denote $$\hat{R}_{d} = \bigg\{ \exists n\geq 1 \quad S_n^{(d)} = 0 \bigg\}$$
+i.e. if we ever return to $0$
+$$p_d = P(\hat{R}_{d})$$
+Denote also
+$$T_d = \bigg\{ \lim_{n \to \infty} S_n^{(d)} = \infty \bigg\}$$
+
+We claim that $S_n \in T_d \cup S_d$. If $S_d \notin T_d$ in comes infinite time into ball of radius $N$, and thus will some tome return to $0$.
+
+Now we ask if $p_d = 1$.
+
+\paragraph{Reminder} Stirling approximation
+$$n! \approx n^n e^{-n} \sqrt{2\pi n}$$
+$$\lim_{n \to \infty} \frac{n!}{n^n e^{-n} \sqrt{2\pi n}} = 1$$
+\paragraph{Definition}
+If $p_d = 1$ then walk is called recurrent. If $p_d<1$ walk is called transient.
+
+$$N^d = \left\{ \parbox{2cm}{\scriptsize \centering Number of returns to 0} \right\}$$
+$$N^d = \sum_{n=1}^\infty \mathds{1}_{\left\{0 \right\}} \left(S_n^d\right)$$
+Now, if $p_d < 1$.
+$$P(N^d=0) = 1-p_d$$
+$$P(N^d=1) = p_d(1-p_d)$$
+$$P(N^d=m) = p_d^m(1-p_d)$$
+So, $N^d \sim Geom(1-p_d)$.
+
+If $p_d=1$, then $P(N^D = \infty) = 1$ and thus
+$$\mathbb{E} N^d = \begin{cases}
+\frac{1}{1-p_d} & p_d <1\\\infty & p_d = 1
+\end{cases}$$
+Now, $\mathbb{E} N_d < \infty$ iff $p_d < 1$, and thus we can check if $p_d=1$ by checking if  $\mathbb{E} N_d = \infty$
+
+Lets use indicator method:
+$$\mathbb{E} N^d = \mathbb{E} \sum_{n=1}^\infty \mathds{1}_{\left\{0 \right\}} \left(S_n^d\right) = \sum_{n=1}^\infty \mathbb{E} \mathds{1}_{\left\{0 \right\}} \left(S_n^d\right)  = \sum_{n=1}^\infty \mathbb{E} P \left(S_n^d=0\right)= \sum_{n=1}^\infty \mathbb{E} P \left(S_{2n}^d=0\right)$$
+
+Thus $p_d=1$ iff $\sum_{n=1}^\infty \mathbb{E} P \left(S_{2n}^d=0\right) = \infty$.
+
+For $d=1$:
+$$P(S_{2n}^1 = 0) = \frac{\binom{2n}{n}}{2^{2n}} = \frac{(2n)!}{(n!)^2}\frac{1}{2^{2n}} \approx \frac{(2n)^{2n} e^{-2n} \sqrt{4\pi n}}{\left(n^n e^{-n} \sqrt{2\pi n}\right)^n 2^{2n}} = \frac{1}{\left(\pi n\right)^{\frac{1}{2}}}$$
+Since $\sum_{n=1}^\infty \frac{1}{\left(\pi n\right)^{\frac{1}{2}}} = \infty$, $\sum_{n=1}^\infty \mathbb{E} P \left(S_{2n}^1=0\right) = \infty$ and thus $p_1=1$.
+
+For $d=2$:
+\begin{align*}
+P(S_{2n}^2 = 0) = \frac{\sum_{j=0}^n\binom{2n}{j}\binom{2n-j}{j}\binom{2n-2j}{n-j}}{4^{2n}} = \sum_{j=0}^n\frac{(2n)!}{j!j!(n-j)!(n-j)!4^{2n}} =\\= \frac{(2n)!}{(n!)^24^{2n}} \sum_{j=0}^n\frac{n!}{j!j!(n-j)!(n-j)!} = \frac{(2n)!}{(n!)^24^{2n}} \sum_{j=0}^n \binom{n}{j}^2 = \frac{1}{4^{2n}} \binom{2n}{n}  \binom{2n}{n} = \left[\frac{1}{2^{2n}} \binom{2n}{n} \right]^2 = P^2(S_{2n}^1 = 0) \approx \frac{1}{\pi n} 
+\end{align*}
+Thus the series diverge and $p_2=1$
+
+For $d=3$
+\begin{align*}
+P(S_{2n}^3 = 0) = \frac{\sum_{0 \leq j+k\leq n} \binom{2n}{j}\binom{2n-j}{j}\binom{2n-2j}{k}\binom{2n-2j-k}{n-j-k}}{4^{2n}} = \sum_{0 \leq j+k\leq n} \frac{ (2n)!}{(j!)^2 (k!)^2 ((n-j-k)!)^2 6^{2n}}  =\\= \frac{(2n)!}{(n!)^26^{2n}}  \sum_{0 \leq j+k\leq n} \frac{ (n!)^2}{(j!)^2 (k!)^2 ((n-j-k)!)^2 }  =\frac{(2n)!}{(n!)^26^{2n}}  \sum_{0 \leq j+k\leq n} \left(\frac{ n!}{j! k! (n-j-k)! }\right)^2 \leq\\\leq \frac{(2n)!}{(n!)^26^{2n}}  \frac{ n!}{\left(\frac{n}{3}\right)!\left(\frac{n}{3}\right)!\left(\frac{n}{3}\right)! } \sum_{0 \leq j+k\leq n} \frac{ n!}{j! k! (n-j-k)! } =\\= \frac{(2n)!}{(n!)^26^{2n}}  \frac{ n!}{\left(\left(\frac{n}{3}\right)!\right)^3 } \sum_{0 \leq j+k\leq n} 3^n \approx \frac{(2n)^{2n} e^{-2n} \sqrt{4\pi n}3^n}{n^n e^{-n} \sqrt{2\pi n} 6^{2n} \left( \left(\frac{n}{3}\right)^{\frac{n}{3}} e^{-\frac{n}{3}} \sqrt{2\pi \frac{n}{3}}\right)^3} =\\=  \frac{(2n)^{2n} e^{-2n} \sqrt{4\pi n}3^n}{n^n e^{-n} \sqrt{2\pi n} 6^{2n} \left( \frac{n}{3}\right)^{n} e^{-n} \left(2\pi \frac{n}{3}\right)^{\frac{3}{2}}} =  \frac{  \sqrt{2}}{     \left(2\pi \frac{n}{3}\right)^{\frac{3}{2}}} = \frac{  \sqrt{ \frac{16\pi^3}{27}}}{    n^{\frac{3}{2}}}
+\end{align*}
+Thus $p_3 < 1$, i.e. for $d=3$ the walk is diverging. This is counter-intuitive since each pair of coordinates returns to 0, but all three go to infinity.
+
+Denote $R_d$ event that walk returns to $0$ infinite times. Then $P(R_d) + P(T_d) = 0$. Note that $P(\hat{R}_d) \geq \frac{1}{2d}$.

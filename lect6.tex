@@ -1,0 +1,24 @@
+\paragraph{Variance} Lets look at
+$$\sigma^2 = \mathbb{E} (X-\mathbb{E}X)^2 = \mathbb{E}(X-\mu)^2 = \sum_{k=1}^\infty p_j (x_j - \mu)^2$$
+Variance measures at closeness of random variable to the expectation.
+
+Standard deviation $\sigma$ is square root of variance.
+Also
+
+$$\sigma^2 = \sum_{k=1}^\infty p_j (x_j - \mu)^2 = \sum_{k=1}^\infty p_j x_j^2 -2\mu \sum_{k=1}^\infty p_jx_j + \mu^2 \sum_{k=1}^\infty p_j =  \mathbb{E}X^2 - 2\mu \cdot mu + \mu^2 = \mathbb{E}X^2 - \mu^2$$
+i.e.
+$$\sigma^2 = \mathbb{E}X^2 - (\mathbb{E}X)^2 = \mathbb{E}X^2 - \mu^2$$
+
+\subsection{Classical discrete distributions}
+\subsubsection{Binomial distribution}
+Model:
+\begin{enumerate}
+	\item There are $n$ independent experiments (Bernoulli trials)
+	\item There are two possible results (success and fail)
+	\item In every experiment, probability of success is $p$.
+\end{enumerate}
+Denote
+$$X  =\left\{ \parbox{2cm}{\centering \scriptsize number of successes} \right\}$$
+Then
+$$P(X=k) = \binom{n}{k} \cdot p^k (1-p)^{n-k}$$
+We say that $X \sim Bin(n,p)$ and $\mathbb{E}X = np$.

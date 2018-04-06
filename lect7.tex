@@ -1,0 +1,66 @@
+Lets show that:
+\begin{align*}
+\mathbb{E}X = \sum_{k=0}^n k \binom{n}{k} p^k (1-p)^{n-k} = \sum_{k=1}^n k \frac{n!}{k!(n-k)!} p^k (1-p)^{n-k} =\\= \sum_{k=1}^n = \frac{n!}{(k-1)!(n-k)!} p^k (1-p)^{n-k} = np \sum_{k=1}^n \frac{(n-1)!}{(k-1)!(n-k)!} p^{k-1 }(1-p)^{n-k}
+\end{align*}
+Denote $j = k-1$
+$$\mathbb{E}X= np \sum_{k=1}^n \frac{(n-1)!}{(k-1)!(n-k)!} p^{k-1 }(1-p)^{n-k} = np \sum_{j=0}^{n-1} \underbrace{\binom{n-1}{j}p^{j}(1-p)^{(n-1)-j}}_{\sim Bin(n-1,p) \Rightarrow 1} = np $$
+
+\paragraph{Note} $\mathbb{E}X^n$ is $n^{th}$ moment of $X$
+\paragraph{Variance of $X$}
+Since $\mathbb{E}X = np$ and $Var(X) = \mathbb{E}X^2 - (\mathbb{E}X)^2 = \mathbb{E}X^2 - n^2p^2$
+Lets calculate $\mathbb{E}X^2$:
+$$\mathbb{E}X^2 = \sum_{k=0}^n k^2 \binom{n}{k} p^k (1-p)^{n-k} = \sum_{k=0}^n k(k-1) \binom{n}{k} p^k (1-p)^{n-k} + \underbrace{\sum_{k=0}^n k \binom{n}{k} p^k (1-p)^{n-k}}_{\mathbb{E}X}$$
+\begin{align*}
+\sum_{k=0}^n k(k-1) \binom{n}{k} p^k (1-p)^{n-k} =  \sum_{k=2}^n k(k-1) \frac{n!}{k!(n-k)!} p^k (1-p)^{n-k} =\\= \sum_{k=2}^n \frac{n!}{(k-2)!(n-k)!} p^k (1-p)^{n-k}  = n(n-1)p^2 \underbrace{\sum_{k=2}^n \frac{(n-2)!}{(k-2)!(n-k)!} p^{k-2 }(1-p)^{n-k}}_{\sim Bin(n-2,p) \Rightarrow 1} =  n(n-1)p^2 
+\end{align*}
+Then
+$$Var(X) = n(n-1)p^2  + np - n^2p^2 = n^2p^2 +np- np^2 -n^2p^2 = np(1-p)$$
+
+
+\subsubsection{Geometric distribution}
+Performing Bernoulli trials until success. Define random variable
+$$X = \left\{ \parbox{2cm}{\scriptsize \centering Number of required experimets} \right\}$$
+$$P(X=n) = (1-p)^{n-1} p $$
+$$X \sim Geom(p)$$
+Then
+$$\mathbb{E}X = \sum_{n=1}^\infty n(1-p)^{n-1}p $$
+
+Lets use generating functions. Define $g(x) = \sum_{n=0}^\infty x^n = \frac{1}{1-x}$
+Then $g^\prime(x) = \sum_{n=1}^\infty nx^{n-1} = \frac{1}{(1-x)^2}$
+Then $g^\prime(1-p) = \sum_{n=1}^\infty n(1-p)^{n-1} = \frac{1}{p^2}$
+i.e
+$$\mathbb{E}X = \frac{p}{p^2} = \frac{1}{p}$$
+Then
+$$\mathbb{E}X^2 = \sum_{n=1}^\infty n^2(1-p)^{n-1}p = \sum_{n=2}^\infty n(n-1)(1-p)^{n-1}p+\frac{1}{p}$$
+For same $g$, $g^{\prime\prime}(x) = \sum_{n=2}^\infty n(n-1)x^{n-2} = \frac{2}{(1-x)^3}$.
+Substituting
+$$\mathbb{E}X^2 = \sum_{n=2}^\infty n(n-1)(1-p)^{n-1}p+\frac{1}{p} = p(1-p) \cdot \frac{2}{p^3} + \frac{1}{p} =  \frac{2(1-p) }{p^2} + \frac{1}{p} = \frac{2}{p^2} - \frac{1}{p}$$
+Thus
+$$Var(X) = \frac{2}{p^2} - \frac{1}{p} - \frac{1}{p^2} = \frac{1-p}{p^2}$$
+\paragraph{Lemma}
+Let $X$ random variable with finite expectation. Then $\mathbb{E}(X+c) = \mathbb{E}X + c$ and $\mathbb{E}(cX) = c\mathbb{E}X$.
+\subparagraph{Proof}
+Define $Y= X+c$
+Then
+$$\mathbb{E}Y  = \sum p_i (x_i + c) = \sum p_i x_i + c\sum p_i = \mathbb{E}X+c $$
+Similarly for $Z=cX$.
+\paragraph{Lemma}
+Let $X$ random variable with finite expectation. Then $Var(X+c) = Var(X)$ and $Var(cX) = c^2 Var(x)$.
+\subparagraph{Proof}
+Denote $Y = X+c$:
+$$Var(Y) = \mathbb{E}(X+c - (\mathbb{E}X+c))^2 = \mathbb{E}(X-\mathbb{E}X)^2 = Var(X)$$
+$Z=cX$:
+$$Var(Z) = = E(\mathbb{E}X - c\mathbb{E}X)^2 = \mathbb{E}c^2(X-\mathbb{E}X)^2 = c^2 Var(X)$$
+
+\subsubsection{Hypergeometric distribution}
+There are $N$ balls in box, $m$ are ''good`` and $N-m$ are ''bad``. We take out $n$ balls out of box and count how much are good. There are $n$ Bernoulli trials. Probability that it every of them would be successful is $\frac{m}{N}$. But experiments aren't independent, so it's not binomial distribution.
+
+We know that $0\leq k \leq m$ and $0\leq n-k \leq N-m$. Thus $$\max (0, n+m-N) \leq k \leq \min(m,n)$$
+For $k$ in this range
+$$P(X=k) = \frac{\binom{m}{k}\binom{N-m}{n-k}}{\binom{N}{n}}$$
+
+For hypergeometric distribution:
+$$EX = \frac{nm}{N}$$
+$$Var(X) = n \frac{m}{N}\left(1-\frac{m}{N}\right) \frac{N-n}{N-1}$$
+
+In limit of $N,m \to \infty$ and $\frac{m}{N} \to p$, then for fixed $n$, we get back the binomial distribution.

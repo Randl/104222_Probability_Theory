@@ -1,0 +1,86 @@
+\section{Weak law of large numbers (WLLN)}
+Suppose $\left\{ X_n \right\}_{n=1}^\infty$ IID random variables. Denote
+$$S_n = \sum_{j=1}^n X_j$$
+Suppose also that first two moments exist, denote  $\mu=\mathbb{E}X_n$ and $\sigma^2 = Var(X_n)$ exist.
+\paragraph{Weak law of large numbers}
+$$\lim_{n \to \infty} P \left( \left| \frac{S_n}{n} - \mu \right| > \epsilon \right) = 0$$
+or
+$$\frac{S_n}{n} \stackrel{\text{prob}}{\to} \mu$$
+\subparagraph{Proof}
+Chebyshev inequality:
+$$P \left( \left| Y  -\mathbb{E} Y\right| > \lambda \right) \leq \frac{\sigma^2}{\lambda^2}$$
+With $Y = \frac{S_n}{n}$.
+$$\mathbb{E} \frac{S_n}{n} = \frac{1}{n} \mathbb{E} S_n = \frac{1}{n}  \mathbb{E}  \sum_{j=1}^n X_j = \frac{1}{n}  \mathbb{E} nX_1 = \mu  $$
+$$\sigma^2 \left( \frac{S_n}{n} \right) = \frac{1}{n^2} \sigma^2(S_n)  = \frac{1}{n^2} \sigma^2\left(   \sum_{j=1}^n X_j  \right)  = \frac{1}{n^2}\sum_{j=1}^n \sigma^2\left(    X_j  \right)  = \frac{1}{n^2}\cdot n \sigma^2 = \frac{\sigma^2}{n}   $$
+
+$$P \left( \left| \frac{S_n}{n} - \mu \right| > \lambda \right) \leq \frac{\sigma^2}{n \epsilon^2} \to 0$$
+
+Same can be proofed without second moment, though the proof is more complicated.
+
+\paragraph{Example}
+If $X_j \sim Ber(p)$
+$X = S_n \sim Bin(n,p)$. Thus
+$$\lim_{n\to \infty} = P \left(  \left| \frac{X}{n} - p \right| \geq \epsilon\right) = 0$$
+\paragraph{Example}
+Note that $P(S_n = \mu) \not \to 1$.
+
+If $X_j \sim Ber(p)$, then
+$$P\left(\frac{S_n}{n} = p \right) = P\left(S_n = pn \right)$$
+
+Let $p = \frac{1}{2}$ and substitute $2n$:
+
+$$P\left(\frac{S_n}{n} = p \right) = P\left(S_n = n \right) = \binom{2n}{n} \left(\frac{1}{2}\right)^{2n} = \frac{(2n)!}{(n!)^2}\left(\frac{1}{2}\right)^{2n}  \approx \frac{(2n)^{2n} e^{-2n} \sqrt{4\pi n} }{n^{2n} e^{-2n} (2\pi n)  2^{2n }} = \frac{1}{\sqrt{\pi n}} \to 0 $$
+\paragraph{Notation}
+For $A\cap B = \Omega$ and $A \cup B = \emptyset$.
+then we can write
+$$\mathbb{E} X = \mathbb{E} \left( XI_A + XI_B \right)$$
+When
+$$\mathbb{E} XI_A = E(X,A) = \begin{cases}
+  \sum_{x\in A} xp(x) \\
+  \int\limits_{A} xf(x) dx
+\end{cases}$$
+\paragraph{Weierstrass approximation theorem}
+Suppose $f$ is a continuous real-valued function defined on the real interval $[a, b]$. For every $\epsilon > 0$, there exists a polynomial $p$ such that for all $x \in [a, b]$, we have $$|f(x) - p(x) | < \epsilon$$ or equivalently, the  supremum norm $$||f(x) - p(x) || < \epsilon$$.
+
+\subparagraph{Proof}
+$\forall p\in [0,1]$ let $\left\{ X_{n,p} \right\}_{n=1}^\infty$ IID random variables such that $X_i \sim Ber(p)$. Denote $S_{n,p} = \sum_{j=1}^n X_{j,p}$. Then
+$$\mathbb{E} \frac{S_{n,p}}{n} = p$$
+and
+$$\sigma^2 \left(\frac{S_{n,p}}{n}\right) = \frac{1}{n^2}\sigma^2 \left(S_{n,p}\right) = \frac{1}{n^2} \sigma^2 \left(\sum_{j=1}^n X_{j,p}\right) = \frac{1}{n} \sigma^2(X_1) = \frac{1}{n} p(1-p)$$
+Thus from Chebyshev
+$$P \left( \left| \frac{S_{n,p}}{n} - p  \right| \geq \epsilon \right) \leq \frac{p(1-p)}{\epsilon^2 n} \leq \frac{1}{4\epsilon^2 n}$$
+
+Let $f \in \mathcal{C} \left([0,1]\right)$ and $\epsilon > 0$. Lets find polynomial $Q(x)$ such that
+$$|f(x) - Q(x) | < \epsilon $$
+Denote
+$$M = \max\limits_{x\in [a,b]} |f(x)|$$
+Also $f$ is uniformly continuous, we can choose $\delta>0$ such that $|x-y|  <\delta \Rightarrow |f(x) - f(y) | < \frac{\epsilon}{2}$.
+
+Since $\frac{S_n}{n} \in [0,1]$, we can look at $f(S)$. Then
+$$\mathbb{E} f \left( \frac{S_n}{n} \right) = \sum_{j=0}^\infty f \left( \frac{j}{n} \right) \binom{n}{j} p^j (1-p)^{n-j} = Q_n(p)$$
+$$|Q_n(p) - f(p) | = \left| \mathbb{E} f\left( \frac{S_n}{n} \right) - f(p)  \right| = \left| \mathbb{E} \left[f\left( \frac{S_n}{n} \right) - f(p)\right]  \right| \leq  \mathbb{E} \left|  f\left( \frac{S_n}{n} \right) - f(p) \right|  $$
+Now divide domain of expectation into two:
+$$\mathbb{E} \left|  f\left( \frac{S_n}{n} \right) - f(p) \right|   = \mathbb{E} \left(\left|  f\left( \frac{S_n}{n} \right) - f(p) \right|, \frac{S_n}{n} - p \leq \delta \right) + \mathbb{E} \left(\left|  f\left( \frac{S_n}{n} \right) - f(p) \right|, \frac{S_n}{n} - p > \delta \right) $$
+
+From uniform continuousness:
+$$\mathbb{E} \left(\left|  f\left( \frac{S_n}{n} \right) - f(p) \right|, \frac{S_n}{n} - p \leq \delta \right)  \leq  \frac{\epsilon}{2} \cdot P\left(\frac{S_n}{n} - p \leq \delta \right) \leq \frac{\epsilon}{2} $$
+And from Chebyshev, as show earlier
+$$\mathbb{E} \left(\left|  f\left( \frac{S_n}{n} \right) - f(p) \right|, \frac{S_n}{n} - p > \delta \right) < 2M \cdot P\left(\frac{S_n}{n} - p > \delta \right)  \leq \frac{2M}{4\delta^2 n} $$
+$$\exists n_0 > 0 \: \forall n>n_0  \quad \frac{2M}{4\delta^2 n}  < \frac{\epsilon}{2}$$
+Thus
+$$|Q_{n_0}(p) - f(p) | < \epsilon$$
+and required polynomial is
+$$Q_{n_0}(p) = \sum_{j=0}^{n_0} f\left(\frac{j}{n}\right) \binom{n}{j} p^j (1-p)^{n-j} $$
+We can obviously map from $[a,b]$ to $[0,1]$ and back to acquire polynomial for any function on compact interval.
+\subsection{First and second moment methods}
+Let $\left\{ Y_n \right\}_{n=0}^\infty$ non-negative random variables (non necessarily on same probability space).
+\paragraph{First moment method}
+If $\lim_{n \to \infty} \mathbb{E} Y_n = 0$ then $\forall \epsilon > 0 \quad \lim_{n \to \infty} P(Y_n>\epsilon) = 0$. We also write $Y \stackrel{\text{prob}}{\to} 0$.
+\subparagraph{Proof}
+From Markov:
+$$P(Y_n>\epsilon) \leq \frac{1}{\epsilon} \mathbb{E} Y_n \to 0$$
+\paragraph{Second moment method}
+If $\lim_{n \to \infty} \mathbb{E} Y_n = \infty$ and $\sigma^2(Y_n) = o\left(\left(\mathbb{E} Y\right)^2\right)$ then $\forall \epsilon > 0 \quad \lim_{n \to \infty} P\left(\left|\frac{Y_n}{\mathbb{E} Y_n} - 1\right|>\epsilon \right) = 0$, i.e. $\frac{Y_n}{\mathbb{E} Y_n} \stackrel{\text{prob}}{\to} 1$.
+\subparagraph{Proof}
+From Chebyshev, since $\mathbb{E} \frac{Y_n}{\mathbb{E} Y_n}  = \frac{1}{\mathbb{E} Y_n}\mathbb{E} Y_n = 1$:
+$$ P\left(\left|\frac{Y_n}{\mathbb{E} Y_n} - 1\right|>\epsilon \right) \leq \frac{1}{\epsilon^2} Var \left( \frac{Y_n}{\mathbb{E} Y_n} \right) = \frac{1}{\epsilon^2}  \frac{\sigma^2(Y_n)}{(\mathbb{E} Y_n)^2} \to 0$$

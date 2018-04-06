@@ -1,0 +1,63 @@
+\section{Intro}
+\subsection{Probabilistic experiments}
+\begin{enumerate}
+	\item Throwing two dices. Possible results: $\left\{(i,j) : 1\leq 1,6 \leq 6 \right\}$.
+	$$P(\left\{ (i,j) \right\}) = \frac{1}{36}$$
+	\item Throwing of coin until we get heads (H). $\left\{ 1,2,3,\dots \right\}$. Probability is $$P(\left\{ n \right\})\left(\frac{1}{2}\right)^n$$
+	\item Choosing a random number in $[0,2]$. Random means that $$P\bigg( (a,b) \bigg) = \frac{b-a}{2}$$
+\end{enumerate}
+
+\paragraph{State space} is a space of all possible results of the experiment. Is denoted with $\Omega$.
+\paragraph{Event} $A$ is subset of state space. $A \subset \Omega$.
+\paragraph{Function of probability} (or measure of probability) is a function defined on particular set of events in $\Omega$ and has following properties:
+\begin{enumerate}
+	\item $P(\emptyset) = 0$ and $P(\Omega) = 1$.
+	\item $0\leq P(A) \leq 1$ if $P(A)$ is defined.
+	\item Sigma-additivity: if $\left\{ A_n \right\}_{n=1}^\infty$ are disjoint then
+	$$P(\bigcup_{n=1}^\infty A_n) = \sum_{n=1}^\infty P(A_n)$$
+	Sigma prefix means it works for countable infinite number of terms.
+\end{enumerate}
+
+\paragraph{Example}
+Since $P\bigg((a,b)\bigg) = \frac{b-a}{2}$ and $\left\{ x \right\} \subset (x-\epsilon, x+\epsilon)$:
+$$P(x) \leq P\bigg( (x-\epsilon, x+\epsilon) \bigg) = \frac{2\epsilon}{2} = \epsilon$$
+$$P(x)  = 0$$
+
+It turns out that it's impossible  to define probability function on $[0,2]$ such that it is invariant to shifts and, subsequently, $P\bigg((a,b)\bigg) = \frac{b-a}{2}$ and defined on every subset of $[0,2]$.
+
+For finite or infinite countable state spaces probability is defined for every event.
+
+Notation:
+\begin{enumerate}
+	\item $A^C = \Omega - A$. Since $\Omega = A + A^C$, $P(A^C) = 1 - P(A)$.
+	\item $P(A\cup B) = P(A) + P(B) - P(A\cap B)$
+	
+	Proof: $A = (A-B) \cup (A\cap B)$ and $B = (B-A) \cup (A\cap B)$. Also $A\cup B = (A-B)\cup(B-A)\cup (A\cap B)$.
+	
+	Then  $P(A) = P(A-B) + P(A\cap B)$ and $P(B )= P(B-A) + P(A\cap B)$
+	
+	 $P(A-B) = P(A) - P(A\cap B)$ and $ P(B-A) = P(B)-P(A\cap B)$
+	 
+	 We get 
+	 $$P(A\cup B) = P(A-B)+P(B-A)+P(A\cap B) = P(A) - P(A\cap B) + P(B)-P(A\cap B) +P(A\cap B)  = P(A) + P(B) - P(A\cap B)$$
+	 \item Let $\left\{ A_n \right\}_{n=1}^\infty$ is increasing sequence of events:
+	 $A_n \subset A_{n+1}$. Denote $A = \bigcup_{n=1}^{\infty} A_n$. We say that $A_n$ goes to $A$ and write 
+	 $$A = \lim_{n \to \infty} A_n$$
+	 
+	 Similarly for decreasing sequence of $A_n \supset A_{n+1}$.
+	
+\end{enumerate}
+\paragraph{Theorem} If $A = \lim_{n \to \infty} A_n$ then $P(A)= \lim_{n \to \infty} P(A_n)$.
+\subparagraph{Proof}
+Via disjointing. Define $B_1 = A_1$ and $B_n = A_n - A_{n-1}$. From the construction $\left\{ B_n \right\}_{n=1}^{\infty}$ are disjoint. Also
+$$A_k = \bigcup_{n=1}^{k} B_n$$
+then
+$$A = \bigcup_{n=1}^\infty A_n = \bigcup_{n=1}^\infty B_n$$
+Then
+$$P(A_k)= \sum_{n=1}^{k} B_n$$
+$$P(A)= \sum_{n=1}^{\infty} B_n$$
+Since $P(A_k)$ are partial sums of converging series, $P(A) = \lim_{n \to \infty} P(A_n)$.
+\subsection{Conditional probability}
+\paragraph{Conditional probability} Let $\Omega$ is state space and $A,B \subset \Omega$ events. Suppose that $P(A) \neq 0$. Define
+$$P(B|A) = \frac{P(A\cap B)}{P(A)}$$
+We say probability of B given A.

@@ -1,0 +1,59 @@
+\paragraph{Chebyshev's inequality}
+Let $X$ random variable for which second moment exists. Denote $\mu = \mathbb{E} X$ and $\sigma^2 = Var(x)$ then
+$$P(|X-\mu| \geq \lambda) \leq \frac{\sigma^2}{\lambda^2}$$
+
+\subparagraph{Proof}
+Define $Y = (X-\mu)^2$
+By Markov inequality:
+$$P(|X-\mu|\geq \lambda) = P\left( (X-\mu)^2 \geq \lambda^2 \right) = P\left( Y^2 \geq \lambda^2 \right) \leq \frac{1}{\lambda^2} \mathbb{E} Y = \frac{\mathbb{E} (X-\mu)^2}{\lambda^2} = \frac{\sigma^2}{\lambda^2}$$
+\section{Multiple random variable}
+\paragraph{Random vector}
+Let $X$ and $Y$ two random variables on same probability space. Then $(X,Y)$ is random vector. Define
+$$F(x,y) = P(X \leq x, Y \leq y)$$
+which is called joint distribution function.
+\paragraph{Claim}
+\begin{enumerate}
+	\item  $F$ is monotonic in both $x$ and $y$.
+	\item  $\lim_{x\to -\infty} F(x,y)=\lim_{y\to -\infty} F(x,y) = 0$.
+	\item  $\lim_{x\to \infty} F(x,y)= F_Y(y)$
+	
+	$\lim_{y\to \infty} F(x,y) = F_X(x)$.
+	
+	$F_X$ and $F_Y$ are called marginal distribution function.
+	\item  $\lim_{x\to \infty, y\to \infty} F(x,y)= 1$
+	
+	\item  $F$ is continuous from the right for both of $x$ and $y$.
+\end{enumerate}
+\paragraph{Claim}
+$$-\infty \leq a < b \leq +\infty$$
+$$-\infty \leq c < d \leq +\infty$$
+
+Then
+$$P(a<X\leq b, c < Y \leq d) = F(b,d) - F(b,c) - F(a,b) + F(a,c)$$
+
+
+\paragraph{Discrete vector}
+$F(x,y)$ is piecewise constant. In other words, $X$,$Y$ are discrete random variables:
+$$P(X=x_i) = p_i^X : p_i^X > 0$$
+$$P(Y=y_j) = p_j^Y : p_j^Y > 0$$
+and
+$$P\Big((X,Y) = (x_i, y_j)\Big)  = P(X=x_i, Y=y_j) = p_{ij}: p_{ij} \geq 0$$
+
+Then we can write
+$$p_i^X = P(X=x_i) = \sum_{j=1}^m p_{ij}$$
+$$p_j^Y = P(Y=y_i) = \sum_{i=1}^n p_{ij}$$
+
+Now if we take the previous equation:
+$$P(a<X \leq b , c < Y \leq d) = F(b,d)-F(a,d) -F(b,c)-F(a,c)$$
+Then if $a \to b$ and $c \to d$:
+\begin{align*}
+P\Big((X,Y) = (b,d)\Big) = P(a<X \leq b , c < Y \leq d) = F(b,d)-F(b^-,d) -F(b,d^-)+F(b^-, d^-) =\\= \big( F(b,d)-F(b^-,d) \big) - \big( F(b,d^-)-F(b^-, d^-)  \big)
+\end{align*}
+
+\paragraph{Continuous variable}
+$F(x,y)$ continuous in both $x$ and $y$. We always suppose that $F$ is piecewise twice differentiable and define
+$$f(x,y) = \frac{\partial^2 F}{\partial x \partial y}$$
+Then
+\begin{align*}
+\int_a^b \int_c^d f(x,y) dxdy = \int_a^b dx \int_c^d dy \frac{\partial}{\partial y} \left( \frac{\partial F}{\partial x} \right) (x,y)  =\\= \int_a^b dx \left(\frac{\partial F}{\partial x}(x,d) - \frac{\partial F}{\partial x}(x,b)\right) = F(b,d) -F(a,d) - F(b,c) + F(a,c) = P(a<X \leq b , c < Y \leq d)
+\end{align*}

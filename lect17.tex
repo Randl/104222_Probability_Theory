@@ -1,0 +1,31 @@
+\paragraph{Example}
+$X_i \sim Exp(\lambda)$ IID.
+$X_1$ is time until first call.  $X_i$ is time between $(i-1)^{th}$ and $i^{th}$ calls. Then time until call is $S_n = \sum_{i=1}^n X_i$.
+
+Choose a time window $T$. Then number of calls in interval $[0,T]$ is denoted $N$.
+
+Denote density of $S_n$ as $f_n$. Since $S_1=X_1$, $f_1(t) = \lambda e^{-\lambda t}$
+\paragraph{Theorem} $f_n(t) = \lambda^n \frac{t^{n-1}}{(n-1)!}e^{-\lambda t}$.
+\subparagraph{Proof}
+By induction. Basis is trivial. 
+
+Step.
+$$S_{n+1} = S_n + X_{n+1}$$
+and $S_n$ and $X_{n+1}$ are independent. 
+Then $f_{n+1}$:
+\begin{align*}
+f_{n+1}(t) = \left(f_n * f_1\right)(t)= \int_{-\infty}^\infty f_n(s) f_1(t-s) ds = \int_{0}^t \frac{\lambda^n s^{n-1}}{(n-1)!}e^{-\lambda s} \lambda e^{-\lambda (t-s)} ds =\\= \frac{\lambda^{n+1}}{(n-1)!}e^{-\lambda t}\int_{0}^t s^{n-1} ds  = \frac{\lambda^{n+1}}{(n-1)!}e^{-\lambda t}\frac{t^n}{n} = \frac{\lambda^{n+1}t^n}{n!}e^{-\lambda t} 
+\end{align*}
+\paragraph{Theorem} $N \sim Pos(\lambda T)$.
+\subparagraph{Proof}
+$$N = \max \left\{ n \geq 0: S_n \leq T \right\}$$
+Also
+$$\left\{ N=0 \right\} = \left\{ S_1 > T \right\} $$
+$$P(N=0) = P(S_1>T) = \int_T^\infty \lambda e^{-\lambda T} dt= e^{-\lambda T}$$
+
+$$\left\{ N \geq n \right\} = \left\{ S_n \leq T \right\}$$
+\begin{align*}
+P(N\geq n) = P(S_n \leq T) = \int_0^T f_n(t) dt = \int_0^T \lambda^n \frac{t^{n-1}}{(n-1)!}e^{-\lambda t} dt = \frac{\lambda^n}{(n-1)!} \int_0^T  t^{n-1}e^{-\lambda t} dt =\\= - \frac{\lambda^n}{(n-1)!}e^{-\lambda T} \sum_{i=1}^{n-1} \frac{T^{n-i}}{\lambda^i} = -- \frac{\lambda^n}{(n-1)!}e^{-\lambda T} + P(N \geq n-1)
+\end{align*}
+I.e.
+$$P(N=n-1) = P(N \geq n-1 ) - P(N \geq n) = \frac{(\lambda T)^{n-1}}{(n-1)!}e^{-\lambda T} $$

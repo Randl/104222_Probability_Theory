@@ -1,0 +1,32 @@
+$$F_{Y|X=x} = P\left( Y \leq y|X=x \right) = \sum_{y^\prime \leq y} P\left( Y = y^\prime |X=x \right) = \sum_{y^\prime \leq y} p_{Y|X=x}\left(y^\prime |x \right) = \frac{1}{p(x)} \sum_{y^\prime \leq y} p\left(x, y^\prime  \right)$$
+$$\mathbb{E} (Y|X=x) = \sum_y y p_{Y|X}(y|x) = \sum_y y \frac{p(x,y)}{p_X(x)} = \frac{1}{p_X(x)} \sum_y y p(x,y)$$
+$$\mathbb{E} \big(\Psi(Y)|X=x\big) = \sum_y \Psi(y) p_{Y|X}(y|x)$$
+
+\paragraph{Example}
+$$X \sim Pois(\lambda)$$
+$$Y|X=x  \sim Bin(x,p)$$
+Find distribution of $Y$
+\subparagraph{Solution}
+$$P(Y=y) = \sum_x P(X=x,Y=y) = \sum_x P(X=x) P(Y=y|X=x) $$
+or
+$$P(Y=y) = \sum_x p(x,y) = \sum_x p_X(x) p_{Y|X} (y|x)$$
+
+Now
+$$P(X=x) = \frac{e^{-\lambda x}}{x!}$$
+$$= P(Y=y|X=x) = \binom{x}{y} p^y (1-p)^{x-y} $$
+Thus
+$$P(Y=y) = \sum_{x=y}^{\infty} \frac{e^{-\lambda} \lambda^x}{x!} \binom{x}{y}  p^y (1-p)^{x-y} =  e^{-\lambda} p^y \sum_{x=y}^{\infty} \frac{1}{x!} \frac{x! \lambda^{x}}{y!(x-y)!}(1-p)^{x-y} = \frac{ e^{-\lambda} p^y}{y!} \lambda^y \sum_{x=y}^{\infty} \frac{ \lambda^{x-y}}{(x-y)!}(1-p)^{x-y}$$
+Denote $x-y=m$
+$$P(Y=y) = \frac{ e^{-\lambda} p^y}{y!} \lambda^y \sum_{m=0}^{\infty}  \frac{ \lambda^{m}}{(m)!}(1-p)^{m} = \frac{ e^{-\lambda} p^y}{y!} \lambda^y  e^{\lambda(1-p)} = e^{-\lambda p} \frac{(\lambda p)^y}{y!}  $$
+\paragraph{Note}
+We write $Y|X \sim Bin(X,p)$ for $Y|X=x \sim Bin(x,p)$.
+\subsection{Continuous case}
+We can't use $P(X=x)$ in continuous case, since it equals 0. Thus we modify the equation as follows:
+\begin{align*}
+P\big(Y \leq y | X \in [x, x+\epsilon]\big) = \frac{P\big( x \leq X \leq x+\epsilon, Y \leq y \big)}{P\big( x \leq X \leq x+\epsilon \big)} = \frac{\int_{-\infty}^y dy^\prime \int_x^{x+\epsilon} dx^\prime f(x^\prime,y^\prime) }{\int_x^{x+\epsilon} f_X(x^\prime)dx^\prime} =\\= \frac{\frac{1}{\epsilon}\int_x^{x+\epsilon} \left(\int_{-\infty}^y   f(x^\prime,y^\prime)dy^\prime\right) dx^\prime}{\frac{1}{\epsilon}\int_x^{x+\epsilon} f_X(x^\prime)dx^\prime} \stackrel{\epsilon \to 0}{\longrightarrow} \frac{\int_{-\infty}^y   f(x,y^\prime)dy^\prime}{f_X(x)}
+\end{align*}
+Thus
+$$F_{Y|X} (y|x) = \frac{\int_{-\infty}^y   f(x,y^\prime)dy^\prime}{f_X(x)}$$
+$$f_{Y|X}(y|x) = \frac{d}{dy} F_{Y|X} (y|x) =\frac{f(x,y)}{f_X(x)}$$
+\paragraph{``Full density'' formula}
+$$f_Y(y) = \int_{-\infty}^\infty f_x(x) f_{Y|X}(y|x) dx$$

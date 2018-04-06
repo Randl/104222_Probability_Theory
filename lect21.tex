@@ -1,0 +1,45 @@
+\paragraph{Center limit theorem}
+Let $\left\{ X_n \right\}_{n=1}^\infty$ 
+IID random variables with two moments. Denote $\mu = \mathbb{E}X_n$ and $\sigma^2 = Var(X_n)$. 
+Define $S_n = \sum_{i=1}^n X_i$ and $Z \sim N(0,1)$ then for all $-\infty \leq a < b \leq \infty$ 
+	$$\lim_{n \to \infty} P \left( a \leq \frac{S_n-n\mu}{\sqrt{n} \sigma} \leq b \right) = \int_a^b \frac{e^{-\frac{x^2}{2}}}{\sqrt{2\pi}} dx = P(a \leq Z \leq b)$$ 
+	
+Depending on distribution, the exact value of $n$ such that we can claim that $$P \left( n\mu + a\sigma \sqrt{n} \leq S_n \leq  n\mu + b\sigma \sqrt{n}  \right) \approx \int_a^b\frac{e^{-\frac{x^2}{2}}}{\sqrt{2\pi}} dx $$
+For fairly good distribution $n > 30$.
+
+\paragraph{Two words on proof}
+We can define characteristic function of random variable
+$$\Phi_X(t) = \mathbb{E} e^{itX} = \int_{-\infty}^{\infty} e^{itx} f(x) dx = \mathcal{F} [f(x)]$$
+Characteristic function  is continuous and unique for a distribution. Then, from $M_Z(t) = e^{\frac{t^2}{2}}$ we can acquire $\Phi_Z(t) =  e^{-\frac{t^2}{2}}$
+
+The continuity theorem claims that for $\left\{ X_n \right\}_{n=1}^\infty $, if $\lim_{n \to \infty} \Phi_{X_n}(t) = \Psi(t)$, then 
+$$\exists X \quad \Psi(t) = \mathbb{E} e^{itX}$$
+and
+$$\lim_{n \to \infty}  P(a\leq X_n \leq b) = P(a\leq X \leq b)$$
+
+We can show that
+$$\lim_{n \to \infty} \Phi_{\frac{S_n-n\mu}{\sqrt{n} \sigma}} (t) = e^{-\frac{t^2}{2}}$$
+and thus acquire that $\frac{S_n-n\mu}{\sqrt{n} \sigma} \sim Z$.
+\paragraph{Example}
+Denote $R_{100}$ number of heads in 100 tosses of fair coin. Find for which $a$
+$$P(50-a\leq R_{100} \leq 50+a) \approx 0.95 $$
+\subparagraph{Solution}
+Denote 
+$\left\{ X_n \right\}_{n=1}^{100}$ such that $X_i \sim Ber \left( \frac{1}{2} \right)$. Denote $S_{100} = \sum_{j=1}^{100}X_i$, then $S_{100}=R_{100}$.
+
+$$P(X_n=0) = P(X_n=1) = \frac{1}{2}$$
+$$\mu = \mathbb{E} X_n = \frac{1}{2}$$
+$$\sigma^2 = \mathbb{E} \left( X_n - \mathbb{E} X_n \right)^2 = \mathbb{E} \left(X_n-\frac{1}{2}\right)^2 = \frac{1}{2}\left(1-\frac{1}{2} \right)^2  + \frac{1}{2}\left(0-\frac{1}{2} \right)^2 = \frac{1}{2}$$
+$$Z \approx \frac{S_{100} - 100 \cdot \frac{1}{2}}{\sqrt{100} \cdot \frac{1}{2}} = \frac{S_{100} - 50}{5}$$
+\begin{align*}
+P(50-a\leq R_{100} \leq 50+a) = P(50-a\leq S_{100} \leq 50+a) = P\left(-\frac{a}{5}\leq \frac{S_{100}-50}{5} \leq \frac{a}{5}\right) \approx P\left(-\frac{a}{5}\leq Z \leq \frac{a}{5}\right) =\\= 2 P \left(-\frac{a}{5}\leq Z \leq 0\right) = 2 \left(\frac{1}{2} - P \left(Z -\frac{a}{5}\right)\right) = 1 - 2 P \left(Z -\frac{a}{5}\right) = 0.95
+\end{align*}
+$$P \left(Z -\frac{a}{5}\right) = 0.025$$
+$$\frac{a}{5} = 1.96 \Rightarrow a = 9.8 \approx 10$$
+\subparagraph{What if $n=10000$?}
+
+$$Z \approx \frac{S_{10000} - 10000 \cdot \frac{1}{2}}{\sqrt{10000} \cdot \frac{1}{2}} = \frac{S_{100} - 50000}{50}$$
+$$P(500-a\leq R_{10000} \leq 500+a) = P\left(-\frac{a}{50}\leq \frac{S_{10000}-500}{50} \leq \frac{a}{50} \right) \approx \dots = 1 - 2 P \left(Z -\frac{a}{50}\right) = 0.95$$
+$$P \left(Z -\frac{a}{50}\right) = 0.025$$
+$$\frac{a}{50} = 1.96 \Rightarrow a = 98 $$
+As we can see, with 10000 we are with high probability withing 1\% around expectation, while for 100 tosses we were only withing 10\%.

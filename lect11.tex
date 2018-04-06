@@ -1,0 +1,92 @@
+\paragraph{Claim}
+Let $\psi$ piecewise monotonous, i.e. consists of finite or countable intervals in each of which its monotonous, then
+$$f_Y(y) = \sum_{x: \psi(x)=y} \frac{f_X(x)}{|\psi^\prime(x)|}$$
+
+\paragraph{Simulation}
+$$U \sim U \left( [0,1] \right)$$
+$$F_U(x) = \begin{cases}
+0,&x<0\\
+x,&0\leq x\leq 1\\
+1,&x>1
+\end{cases}$$
+$$f_U(x) = 1, \: 0\leq x \leq 1$$
+
+To acquire a number which is distributed (approximately) by $U$:
+
+Choose $n \in N$, toss a coin $n$ times and write down a number as binary:
+$0.a_1a_2a_3\dots a_n$. 
+
+\paragraph{Claim} Let $X$ continuous random variable with distribution function $F_X$. Suppose $\exists -\infty \leq a < b \leq -\infty$ such that $F_x(a) = 0 $ and $F_x(b) = 1$, such that $F_X$ is completely monotonic on $(a,b)$. Suppose $U \sim U\big( [0,1] \big)$ and define $Y  =F_X^{-1}(U)$ then $Y \sim X$.
+\subparagraph{Proof}
+$$F_Y(y) = P(Y \leq y)= P(F_X^{-1}(U) \leq y) = P(U \leq F_X(y)) = F_U(F_X(y)) = F_X(y)$$
+\paragraph{Example}
+$$X \sim Exp(\lambda)$$
+$$f_X(x) = \lambda e^{-\lambda x}$$
+$$F_X(x) = \begin{cases}
+0,&x<0\\1-e^{-\lambda x},& x \geq 0
+\end{cases}$$
+Lets find $F^{-1}_X(y) $
+$$y = 1-e^{-\lambda x}$$
+$$-\lambda x = \log (1-y)$$
+$$ x = -\frac{ \log (1-y)}{\lambda}$$
+Thus
+$$F^{-1}_X(y) =  -\frac{1}{\lambda} \log (1-y)$$
+Thus we define
+$$Y = -\frac{1}{\lambda} \log (1-U)$$
+and $Y \sim X$.
+\\
+
+\paragraph{Claim} Suppose $F_X$ is completely monotonic and piecewise continuously differentiable. Then $Y=F_X(X) \sim U([0,1])$. 
+\subparagraph{Proof}
+$$F_Y(y) = P(Y \leq y)= P(F_X(X) \leq y) = P(X \leq F_X^{-1}(y)) = F_X(F_X^{-1}(y)) = y$$
+
+\paragraph{Note}
+$$X = X^+ + X^-$$
+$$\mathbb{E}X^+= \begin{cases}
+\sum_{j: x_j > 0} p_j e^{tx_j} & \text{discrete}\\
+\int_{0}^\infty  e^{tx}f(x) dx & \text{continuous}
+\end{cases}$$
+$$\mathbb{E}X^+= \begin{cases}
+-\sum_{j: x_j < 0} p_j e^{tx_j} & \text{discrete}\\
+-\int_{-\infty}^0  e^{tx}f(x) dx & \text{continuous}
+\end{cases}$$
+
+
+\paragraph{Moment-generating function}
+$$M_X(t) = \mathbb{E} e^{tX}$$
+Obviously $M(0) = 1$.
+Generally:
+$$M_X(t) = \begin{cases}
+\sum_{j=1}^N p_j e^{tx_j} & \text{discrete}\\
+\int_{-\infty}^\infty  e^{tx}f(x) dx & \text{continuous}
+\end{cases}$$
+
+Now, if $\mathbb{E} (X^+)^n = \infty$, then $\forall t>0 \quad M_X(t) = \infty$, and if $\mathbb{E} (X^-)^n = \infty$, then $\forall t<0 \quad M_X(t) = \infty$.
+
+That means that necessary condition for existence of $M_X$ in neighborhood of $0$ is $\mathbb{E} |X|^n < \infty$.
+\paragraph{Note}
+If $M_X(t) < \infty$ for $t$ in neighborhood of $t_0$, then $M_X$ if differentible infinite times and 
+$$\frac{d^n}{dt^n} M_X(t) = \mathbb{E} X^n e^{tX}$$  
+In particular,
+$$\frac{d^n}{dt^n} M_X(0) = \mathbb{E} X^n$$
+By Taylor
+$$M_X(t) = \sum_{n=0}^\infty \frac{M_X^{(n)}(0)}{n!}t^n$$  
+\paragraph{Example}
+$$X \sim N(0,1)$$
+$$f(x) = \frac{e^{-\frac{x^2}{2}}}{\sqrt{2} \pi}$$
+$$M_X(t) = \int_{-\infty}^{\infty} e^{tx} \frac{e^{-\frac{x^2}{2}}}{\sqrt{2} \pi} dx = e^{\frac{t^2}{2}}\int_{-\infty}^{\infty} \frac{e^{-\frac{(x-t)^2}{2}}}{\sqrt{2} \pi} dx = e^{\frac{t^2}{2}}$$
+Thus
+$$M_X(t) = \sum_{n=0}^\infty \frac{t^{2n}}{2^nn!} = \sum_{n=0}^\infty \frac{(2n)!}{2^nn!} \frac{t^{2n}}{(2n!)}$$
+That means
+$$\mathbb{E} X^{2n+1} =0$$
+(that can be seen from direct calculation, acquiring integral of odd function on whole $\mathbb{R}$)
+$$\mathbb{E} X^{2n} = \frac{(2n)!}{2^n} = \frac{2n(2n-1)(2n-2)(2n-3)\dots 1}{2^n n(n-1)(n-2)\dots 1} =  \frac{2^n \cdot n(2n-1)(n-1)(2n-3)(n-2)\dots 1}{2^n n(n-1)(n-2)\dots 1} = (2n-1)(2n-3)(2n-5)\dots \cdot 5 \cdot 3 \cdot 1 $$
+\section{Markov's and Chebyshev's inequalities}
+\paragraph{Markov's inequality }
+Let $Y\geq 0$ and $\mathbb{E} Y < \infty$. Then,
+$$\forall \lambda > 0 \quad P(Y \geq \lambda) \leq \frac{\mathbb{E} Y}{\lambda}$$
+\subparagraph{Proof}
+Discrete:
+$$P(Y \geq \lambda) = \sum_{j: y_j > \lambda} p_j \leq \sum_{j: y_j > \lambda} \frac{y_j}{\lambda} p_j  \leq \frac{1}{\lambda} \sum_j p_jy_j = \frac{\mathbb{E} Y}{\lambda}$$
+Continuous:
+$$P(Y \geq \lambda) = \int_\lambda^\infty f(y) dy \leq \int_\lambda^\infty \frac{y}{\lambda}f(y) dy   \leq \frac{1}{\lambda}\int_0^\infty yf(y)dy = \frac{\mathbb{E} Y}{\lambda}$$

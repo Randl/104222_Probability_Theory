@@ -1,0 +1,104 @@
+\subsection{1D Random Walk}
+$\left\{ X_n \right\}_{n=1}^\infty$ IID, $X_n \sim Ber\left(\frac{1}{2}\right)$ such that $P\left(X_n = 1\right) = P\left(X_n = -1\right) = \frac{1}{2}$. Denote
+$$S_n = j + \sum_{i=1}^n X_i$$
+Denote as $P_j$ and $\mathbb{E}_j$ probability and expectation for specific value of $j$.
+Now define 
+$$\tau_k = \inf \left\{ n \geq 0: S_n = k \right\}$$
+\paragraph{Theorem}
+For $0\leq j \leq L$
+$$h_j = P_j(\tau_0 < \tau_L) = \frac{L-j}{L}$$
+\subparagraph{Proof}
+Lets make first step analysis:
+$$h_j = \frac{1}{2} h_{j+1} + \frac{1}{2} h_{j-1}$$
+Denote events ''went right`` and ''went left`` as $\mathcal{R}$ and $\mathcal{L}$ correspondingly. Then
+$$
+\left\{ \tau_0 < \tau_L \right\} = \left\{ \left\{ \tau_0 < \tau_L \right\}  \cap \mathcal{R} \right\}\left\{ \left\{ \tau_0 < \tau_L \right\}  \cap \mathcal{L} \right\}$$
+\begin{align*}h_j = P_j(\tau_0 < \tau_L) = P_j \left(\left\{ \tau_0 < \tau_L \right\}  \cap \mathcal{R}\right) + P_j \left(\left\{ \tau_0 < \tau_L \right\}  \cap \mathcal{L}\right) =\\= P_j(\mathcal{R})P_j \left(\tau_0 < \tau_L |  \mathcal{R}\right) + P_j(\mathcal{L})P_j \left(\tau_0 < \tau_L |  \mathcal{L}\right) = \frac{1}{2} P_{j+1} \left(\tau_0 < \tau_L \right) + \frac{1}{2} P_{j-1} \left(\tau_0 < \tau_L \right)
+\end{align*}
+Now we got difference equation with bound conditions
+$$2h_j = h_{j+1} + h_{j-1}$$
+$$\forall  1\leq j \leq L-1 \quad h_j - h_{j+1} = h_{j-1} - h_j$$
+And bound conditions are
+$h_0=1$ and $h_L=0$. Denote $\gamma = h_j - h_{j-1}$. Then
+$$1-0 = h_0 - h_L = \sum_{j=1}^L h_{j-1} - h_j = \gamma L$$
+$$\gamma = \frac{1}{L}$$
+Also
+$$h_j = h_j - 0 = h_j - h_L = \sum_{k=j+1}^L  h_{k-1} - h_K = (L-j)\gamma = \frac{L_j}{L}$$
+\paragraph{Notation}
+$$\tau_{0,L} = \inf  \left\{ n \geq 0 : \: S_n=0 \text{ or } S_n = L \right\} = \tau_{0} \lor \tau_L$$
+\paragraph{Theorem}
+$$\mathbb{E}_j \tau_{0,L} = j(L-j)$$
+\subparagraph{Proof}
+$$h_j = \mathbb{E}_j \tau_{0,L}$$
+Bound conditions are $h_0=h_L= 0$.
+$$h_j = \frac{1}{2} \left( 1 + h_{j+1}  \right) + \frac{1}{2} \left( 1 + h_{j+1}  \right) $$
+$$2h_j = 2 + h_{j+1}  + h_{j+1}  $$
+$$h_j - h_{j-1} - 2 =  h_{j+1}  - h_{j}  $$
+Denote $\gamma = h_1-h_0$
+$$h_2-h_1 = h_1 - h_0 -2= \gamma - 2$$
+$$ h_3 - h_2 = h_2-h_1 -2=\gamma - 4$$
+And generally
+$$h_j - h_{j-1} = \gamma - 2(j-1)$$
+$$0-0 = h_L - h_0 = \sum_{1}^L h_j - h_{j-1} = \sum_{j=1}^L \gamma - 2(j-1) = \gamma L  -2 \frac{L(L-1)}{2} = L(\gamma - (L-1)) $$
+$$\gamma = L - 1$$
+$$h_j = h_j - 0 = h_j - h_0 = \sum_{k=1}^j h_k - h_{k-1} = \sum_{k=1}^j \gamma - 2(k-1) = \gamma j - 2 \frac{j(j-1)}{2} = j(\gamma - (j-1)) = j( L - 1 - j + 1) = j(L-j) $$
+
+\paragraph{Notation}
+$$\hat{\tau}_j = \inf \left\{ n \geq : S_n = j \right\}$$
+\paragraph{Conclusion}
+$$\mathbb{E}_0 \hat{\tau}_0 = \infty $$
+\subparagraph{Proof}
+$$\mathbb{E}_0 \hat{\tau}_0 =\frac{1}{2} \left(1 + \mathbb{E}_1 \tau_0\right) + \frac{1}{2} \left(1 + \mathbb{E}_{-1} \tau_0\right) = 1 +\mathbb{E}_1 \tau_0 \stackrel{\forall L\geq 2}{\geq} 1 + \mathbb{E}_1 \tau_{0, L} = L = \infty $$
+\subsection{Asymmetrical random walk}
+$\left\{ X_n \right\}_{n=1}^\infty$ IID, $X_n \sim Ber\left(p\right)$ such that $P\left(X_n = 1\right) = 1-P\left(X_n = -1\right) = p$. WLG $p> 0.5$.
+\paragraph{Theorem}
+For $j \geq 0$:
+$$P_J\left( \tau_0 < \tau_L \right) = \frac{\left( \frac{1-p}{p} \right)^j - \left( \frac{1-p}{p} \right)^L}{1 - \left( \frac{1-p}{p} \right)^L}$$
+$$P_j(\tau_0 < \infty) = \left( \frac{1-p}{p} \right)^j$$
+\subparagraph{Proof}
+Denote
+$$h_j = P_j(\tau_{0} < \tau_L)$$
+And bound conditions are $h_0=1$ and $h_L = 0$.
+Then 
+$$h_j = ph_{j+1} + (1-p) h_{j-1}$$
+$$p\left(h_j - h_{j+1}\right)= (1-p) \left(h_{j-1} - h_{j}\right)$$
+$$h_j - h_{j+1}= \frac{1-p}{p}  \left(h_{j-1} - h_{j}\right)$$
+Denote 
+$$\gamma = h_0-h_1$$
+$$ h_1-h_2 = \frac{1-p}{p} \gamma $$
+And generally
+$$h_j-h_{j+1} = \left(\frac{1-p}{p}\right)^j \gamma $$
+$$1-0= h_0-h_L = \sum_{j=0}^{L-1} h_j - h_{j+1} = \gamma\sum_{j=0}^{L-1} \left(\frac{1-p}{p}\right)^j = \gamma \frac{1 - \left(\frac{1-p}{p}\right)^L}{1- \frac{1-p}{p}}$$
+Thus
+$$\gamma = \frac{1- \frac{1-p}{p}}{1 - \left(\frac{1-p}{p}\right)^L}$$
+Now
+\begin{align*}
+h_j = h_j - 0 = h_j - h_L = \sum_{k=j}^{L-1} h-K - h_{k+1} = \gamma \sum_{k=j} \left(\frac{1-p}{p}\right)^k  = \gamma \frac{\left(\frac{1-p}{p}\right)^j - \left(\frac{1-p}{p}\right)^L}{1- \frac{1-p}{p}}  =\\= \frac{1- \frac{1-p}{p}}{1 - \left(\frac{1-p}{p}\right)^L} \frac{\left(\frac{1-p}{p}\right)^j - \left(\frac{1-p}{p}\right)^L}{1- \frac{1-p}{p}} = \frac{\left(\frac{1-p}{p}\right)^j - \left(\frac{1-p}{p}\right)^L}{1 - \left(\frac{1-p}{p}\right)^L} 
+\end{align*}
+
+For second part, for $ 0 \leq j \leq L$
+$$\left\{ \tau_0 < \infty \right\} = \bigcup_{L=1}^\infty \left\{ \tau_0 < \tau_L \right\}$$
+We can look at sequence of events 
+$$\left\{ \tau_0 < \tau_{L} \right\} \nearrow \left\{ \tau_0 < \infty \right\} $$
+$$P_J \left( \tau_0 < \infty \right) = \lim_{L\to \infty} P_J \left( \tau_0 < \tau_L \right) = \lim_{L\to \infty} \frac{\left( \frac{1-p}{p} \right)^j - \left( \frac{1-p}{p} \right)^L}{1 - \left( \frac{1-p}{p} \right)^L} = \left( \frac{1-p}{p} \right)^j$$
+\section{Branching processes}
+Let $W$ random variable distributed on $\mathbb{N}$ and denote $p_n = P(W = n)$. $W$ is offspring distribution.
+
+Lets start with population of one particle at $t=0$, written as $X_0=1$. At $t=1$ particle generates random number of offsprings and dies. Denote $X_1$ number of its offsprings.
+
+On $t=2$ each of particles independently generates offsprings and dies. Denote $X_2$ total number of offsprings.
+
+$\left\{ X_n \right\}_{n=0]^\infty}$ is called Galton–Watson process. If $X_n=0$ then $X_m = 0$ for all $m \geq n$. Denote
+$$S_n = \left\{ X_n \geq 1 \right\}$$
+i.e. probability that process survives until $t=n$. And
+$$S = \bigcap_{n=0}^\infty S_n$$
+i.e. probability that process is alive forever. Define also complementary events, extinctions
+$$S^c_n = \left\{ X_n = 0 \right\}$$
+$$S^c = \bigcup_{n=0}^\infty S^c_n$$
+\paragraph{Trivial cases}
+If $p_0 = 0$, then $P(S) = 1$.
+
+If $p_0 > 0$ then $P(s) < P(S_1) = 1 - p_0 < 1$ and 
+$$P(S_{n+1} = 0 | S_n = m) = p_0^m$$
+
+\paragraph{Question} $P(S) = 0$ or $P(S) > 0$?

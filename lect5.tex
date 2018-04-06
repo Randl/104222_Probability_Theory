@@ -1,0 +1,53 @@
+\paragraph{Claim}
+Let $F$ distribution function. 
+\begin{enumerate}
+	\item $F$ in monotonous non-decreasing
+	\item $F$ is continuous to the right, i.e. $\lim_{y \to x^+} F(y) = F(x)$.
+	\item $F(x^-) = \lim_{y \to x^-} F(y) = P(X<x)$
+	\item $F(x) - F(x^-) = P(X=x)$
+	\item $\lim_{x \to \infty} F(x) = 1$ and $\lim_{x \to -\infty} F(x) = 0$
+\end{enumerate}
+\subparagraph{Proof}
+\begin{enumerate}
+\item Obvious.
+\item Denote $A = \left\{ X \leq x \right\}$ and $A_n= \left\{ X \leq x+\frac{1}{n} \right\}$. Then $P(A) = F(x)$ and $P(A_n) = F(x+\frac{1}{n})$. We need to show that
+$$\lim_{n \to \infty} F(x+\frac{1}{n}) = F(x)$$
+i.e.
+$$\lim_{n \to \infty} P(A_n) = P(A)$$
+Since $A = \bigcap A_n$, it's true.
+\item Denote $B = \left\{ X < x \right\}$ and $B_n = \left\{ X - \frac{1}{n} \right\}$. That means
+$$P(B_n) = F(x-\frac{1}{n})$$
+Now we claim that 
+$$B = \bigcap_{n=1}^\infty B_n$$
+Since $\omega \in B \iff X(\omega) < x$ and $\omega \in B_n \iff X(\omega) \leq x - \frac{1}{n}$.
+Since
+$$\lim_{n \to \infty} F(x-\frac{1}{n}) = P(X<x) $$
+from monotonousness
+$$F(x^-) =  \lim_{y \to x^-} F(y) =\lim_{n \to \infty} F(x-\frac{1}{n})$$
+\item Since $$\left\{ X \leq x \right\} = \left\{ X <x \right\} \cup \left\{  X  = x \right\}$$
+$$P(X \leq x) = P(X < x) + P(X=x)$$
+Thus
+$$F(x) - F(X^-) = P(X=x)$$
+\item Denote $C_n = \left\{ X \leq n \right\}$. Then
+$$\bigcup_{n=1}^\infty  = \Omega$$
+Then
+$$\lim_{n \to \infty} F(n) = \lim_{n \to \infty} P(C_n) = P(\Omega) = 1$$
+\end{enumerate}
+\paragraph{Definition}
+Random variable is called discrete if its distribution function is piecewise constant, i.e. is constant except countable set of points without accumulation points. Or, alternatively, if it can be written as a finite linear combination of indicator functions of intervals. 
+
+In discrete case exists sequence $\left\{ x_j \right\}_{j=1}^N \subset \mathbb{R}$ and $\left\{ p_j \right\}_{j=1}^N$ for $1\leq N \leq \infty$ such that
+$$P(X=x_j) =p_j$$ and $$\sum_j p_j = 1$$
+\paragraph{Definition}
+Random variable is called continuous if its distribution function is continuous. Thus
+$P(X=x) = 0$
+
+In this case we always assume that $F$ is piecewise continuously differentiable, i.e. its derivative piecewise continuous.Thus,
+$$F(b) - F(a) = \int_a^b F^\prime(x) dx$$
+Then we call $f(x) = F^\prime(X)$ a density function. And 
+$$P(a\leq X \leq b) = \int_a^b f(x) dx$$
+Then
+$$F(x) = \int_{-\infty}^{x} f(t) dt$$
+\paragraph{Expectation}  or expected value, denoted as $\mathbb{E}X$ and defined as
+	$$\mathbb{E}X = \sum_{i=1}^{n} p_j x_j \text{ if } \sum_{i=1}^n p_i |x_i| < \infty $$ 
+\paragraph{Function of random variable} Let $\Psi : \mathbb{R} \to \mathbb{R}$. Define $Y = \Psi(X)$. Then $Y$ is random variable too. Also, then $\mathbb{E}Y = \mathbb{E} \Psi(X) = \sum_{i=1}^{n} p_j \Psi(x_j)$

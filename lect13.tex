@@ -1,0 +1,89 @@
+\paragraph{Lemma}
+Suppose $h$, $g$ integrable on $(c,d)$, $-\infty \leq c < d \leq \infty$. Suppose
+$$\forall c \leq a < b \leq d \int_a^b g(x) dx = \int_a^b h(x) dx$$
+Then if $g$ and $h$ is continuous, $g(x) = h(x)$.
+\subparagraph{Proof}
+Suppose $x \in (c,d)$ such that $g$ and $h$ continuous.
+$$\forall d-x > \delta > 0 \quad \int_x^{x+\delta} g(y) dy = \int_x^{x+\delta} h(y) dy  $$
+$$\frac{1}{\delta}\int_x^{x+\delta} g(y) dy =\frac{1}{\delta} \int_x^{x+\delta} h(y) dy $$
+In limit $\delta \to 0$, for continuous functions $g(x)=h(x)$.
+\paragraph{Claim} 
+$$\int_{-\infty}^{\infty} f(x,y) dy = f_X(x)$$
+and
+$$\int_{-\infty}^{\infty} f(x,y) dx = f_Y(y)$$
+
+\subparagraph{Proof}
+For $-\infty \leq a < b \leq \infty $ and  $-\infty \leq c < d \leq \infty $:
+$$P(a\leq X\leq b, c \leq Y \leq d) = \int_c^d \int _a^b f(x,y) dx dy$$
+In limit $c \to -\infty$, $d \to \infty$:
+$$P(a\leq X\leq b) = \int_{-\infty}^\infty dy \int _a^b f(x,y) dx = \int _a^b  \int_{-\infty}^\infty  f(x,y) dy  dx $$
+But
+$$P(a\leq X\leq b) = \int_a^b f_X(x) dx$$
+Then
+$$\int _a^b  \int_{-\infty}^\infty  f(x,y) dy  dx  = \int_a^b f_X(x) dx$$
+From lemma
+$$ \int_{-\infty}^\infty  f(x,y) dy  = f_X(x)$$
+
+\paragraph{Generalization}
+$$P\big( (X,Y) \in A \big) = \int_a^b dx \int_c^d dy f(x,y) = \iint\limits_A f(x,y) dx dy$$
+
+\paragraph{Dimension reduction}
+$$\Psi: \mathbb{R}^2 \to \mathbb{R}$$
+\subparagraph{Discrete}
+$$\mathbb{E} \Psi(X,Y) = \sum_{i=1}^n \sum_{j=1}^m \Psi(x_i, y_j) p_{ij} $$
+\subparagraph{Continuous}
+$$\mathbb{E} \Psi(X,Y) = \int_{-\infty}^\infty\int_{-\infty}^\infty \Psi(x,y)f(x,y) dxdy$$
+\paragraph{Example}
+$\Psi(x,y) =  \mathds{1}_A$.
+
+Then
+
+$$\mathbb{E} \Psi(X,Y) = \int_{-\infty}^\infty\int_{-\infty}^\infty \Psi(x,y) dxdy = \iint\limits_{A} f(x,y) dx dy = P\big((X,Y) \in A\big)$$
+\paragraph{Example}
+$$\Psi(x,y) = x$$
+Obviously
+$$\mathbb{E} \Psi(X,Y) = \mathbb{E} X$$
+Formally:
+$$\mathbb{E} \Psi(X,Y) = \int_{-\infty}^\infty\int_{-\infty}^\infty x f(x,y) dx dy = \int_{-\infty}^\infty x \int_{-\infty}^\infty  f(x,y)  dy dx = \int_{-\infty}^\infty xf_X(x) dx = \mathbb{E}X$$
+
+\paragraph{Note} Everything said is naturally generalized to $N$ dimensions.
+\subsection{Independence}
+\paragraph{Definition}
+$X$ and $Y$ are independent, if
+$$P\big( a < X \leq b, c < Y \leq d \big) = P\big( a < X \leq b\big) P\big(c < Y \leq d \big)$$
+Which is also generalized to any pair of (measurable)  set:
+$$P(X \in A, Y \in B) = P(X \in A)P(Y \in B)$$
+
+\paragraph{Claim}
+The following 3 are equivalent:
+\begin{enumerate}
+	\item X and Y are independent
+	\item $$F(x,y) = F_X(x)F_Y(y)$$
+	\item $$p_{ij} = p_i^Xp_j^Y$$
+	or 
+	$$f(x,y) = f_X(x)f_Y(y)$$
+	for discrete and continuous respectively.
+\end{enumerate}
+\subparagraph{Proof}
+\begin{enumerate}
+	\item $1 \Rightarrow 2$
+	Immediate. For $a=c=-\infty$ and $b=x$, $d=y$:
+	$$F(x,y) = P \left( X \leq x, Y \leq y \right) = P(X \leq x) P(Y \leq y) = F_X(x) F_Y(y)$$
+	
+	\item $1 \Leftarrow 2$
+	\begin{align*}
+	P(a<X \leq b , c < Y \leq d) = F(b,d) -F(a,d) - F(b,c) + F(a,c) =\\= F_X(b)F_Y(d) - F_X(a) F_Y(d) - F_X(b) F_Y(c) + F_X(a) F_Y(c) =\\= F_Y(d) \left( F_X(b)-F_X(a) \right) -  F_Y(c) \left( F_X(b)-F_X(a) \right) =  \left(F_Y(d)-  F_Y(c)\right) \left( F_X(b)-F_X(a) \right)  = P(a<X\leq b) P(c < Y\leq d)
+	\end{align*}
+	\item $2 \Rightarrow 3$ (continuous)
+	$$F(x,y) = F_X(x)F_Y(y)$$
+	$$\frac{\partial^2 F(x,y)}{\partial xy} = \frac{\partial^2 }{\partial xy} F_X(x)F_Y(y)$$
+	$$f(x,y) = F^\prime_X(x)F_Y^\prime(y) = f_X(x)f_Y(y)$$
+	\item $2 \Leftarrow 3$ (continuous)
+	$$F(x,y) = \int_{-\infty}^x \int_{-\infty}^y f(x,y)dxdy = \int_{-\infty}^x \int_{-\infty}^y f_X(x)f_Y(y) dxdy =  \int_{-\infty}^x  f_X(x) dx \int_{-\infty}^yf_Y(y) dy =F_X(x) F_Y(y)$$
+\end{enumerate}
+\section{Conditional distribution}
+\subsection{Discrete case}
+$$p_{Y|X}(y|x) = P(Y=y|X=x) = \frac{P(X=x,Y=y)}{P(X=x)} = \frac{p(x,y)}{p_X(x)}$$
+We'll call it distribution function. The definition is consistent:
+
+$$\sum_y p_{Y|X}(y|x) = P(Y=y|X=x) = \sum_y \frac{p(x,y)}{p_X(x)} = 1$$

@@ -1,0 +1,21 @@
+\subsubsection{Poisson distribution}
+$$P(X=k) = \frac{\lambda^k}{k!} e^{-\lambda}$$
+$$X \sim Pois(\lambda)$$
+Then $\mathbb{E} X = \sigma^2(X) = \lambda$.
+\paragraph{Theorem (Poisson approximation of binomial distribution)}
+$$\lim_{n \to \infty \: p \to 0 \: np \to \lambda} \binom{n}{k}p^k (1-p)^{n-k} = \frac{\lambda^k}{k!} e^{-\lambda}$$
+If $X_{n,p} \sim Bin(n,p) $ and $X_\lambda \sim Pois(\lambda)$ then
+$$\lim_{n \to \infty \: p \to 0 \: np \to \lambda} P(X_{n,p}=k)  = P(X_\lambda = k) $$
+
+\subparagraph{Proof}
+We can rewrite $p_n = \frac{\lambda + \delta_n}{n}$, where $\delta_n \to 0$
+Let $k \in \mathbb{N}$ and $n\geq k$
+\begin{align*}
+\binom{n}{k}p_n^k (1-p_n)^{n-k} = \frac{n(n-1)\dots (n-k+1)}{k!} \left(\frac{\lambda + \delta_n}{n}\right)^k \left(1-\frac{\lambda + \delta_n}{n}\right)^{n-k} = \frac{n(n-1)\dots (n-k+1)}{k!} \frac{ \left(\lambda + \delta_n\right)^k }{n^k } \frac{\left(1-\frac{\lambda + \delta_n}{n}\right)^{n}}{\left(1-\frac{\lambda + \delta_n}{n}\right)^{k}} =\\=\underbrace{ \frac{n(n-1)\dots (n-k+1)}{n^k}  }_{1}\frac{1}{k!}\underbrace{\left(\lambda + \delta_n\right)^k}_{\lambda^k}\underbrace{ \left(1-\frac{\lambda + \delta_n}{n}\right)^{n}}_{e^{-\lambda}} \underbrace{ \frac{1}{\left(1-\frac{\lambda + \delta_n}{n}\right)^{k}}}_{1} = \frac{\lambda^k}{k!} e^{-\lambda}	
+\end{align*}
+
+$$\mathbb{E}X = \sum_{k=1}^\infty k \frac{\lambda^k}{k!} e^{-\lambda}  = e^{-\lambda}\lambda \sum_{k=1}^\infty  \frac{\lambda^{k-1}}{(k-1)!} =e^{-\lambda} \lambda e^{\lambda} = \lambda  $$
+$$\mathbb{E}X^2 = \sum_{k=1}^\infty k^2 \frac{\lambda^k}{k!} e^{-\lambda} = e^{-\lambda}\left[\sum_{k=1}^\infty \left(k(k-1) + k\right) \frac{\lambda^k}{k!} \right] = \lambda^2 + \lambda$$
+$$\sigma^2(X) = \lambda$$
+
+\subsubsection{Uniform distribution on $[n] = \left\{ 1,2,\dots, n \right\}$}

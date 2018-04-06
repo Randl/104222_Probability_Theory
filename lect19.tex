@@ -1,0 +1,119 @@
+\paragraph{Note}
+If $Y_n$ is integer, then from first moment method $\lim_{n \to \infty} P(Y_n = 0) = 1$.
+\paragraph{Conclusion}
+If second moment method conditions are fulfilled, 
+$$\forall M \quad \lim_{n \to \infty } P(Y_n > M) = 1$$
+\subparagraph{Proof}
+Let $\epsilon = 0.2018$.
+$$1 \leftarrow P \left( \left| \frac{Y_n}{\mathbb{E} Y_n} - 1 \right| \leq 0.2018 \right) = P \left(0.7982 \leq   \frac{Y_n}{\mathbb{E} Y_n}   \leq 1.2018 \right) \leq P \left( 0.7982 \leq \frac{Y_n}{\mathbb{E} Y_n}  \right) = P \left(0.7982 \mathbb{E} Y_n \leq Y_n \right)$$
+
+Since $\mathbb{E} Y_n \to \infty$, for $n$ sufficiently large, for all $M$ $\mathbb{E} Y_n>M$ and thus
+
+$$1 \leftarrow  P \left(0.7982 \mathbb{E} Y_n \leq Y_n \right) \leq  P \left(M \leq Y_n \right)$$
+\section{Random Graphs}
+\paragraph{Reminder}
+Graph is pair of set of vertices and set of edges: $G= \left(V, \mathcal{E}\right)$.
+\subparagraph{Full graph}
+$K_n$ is full graph, if $K=(G, \mathcal{E})$ and 
+$$V = [n] = \left\{ 1,2,3,\dots \right\}$$
+$$\mathcal{E} = \left\{  \left\{ i,j \right\}: 1\leq i < j \leq n \right\}$$
+Then $|\mathcal{E}| = \binom{n}{2}$
+\subparagraph{}
+Take random graph of order $n$. Vertices are deterministic: $V = [n]$. Choose $0\leq p\leq 1$. Then for every potential edge $\left\{i,j\right\} $ we throw a coin with probability $p$ of heads. If we get heads, $\left\{i,j\right\} \in \mathcal{E}$, else $\left\{i,j\right\} \notin \mathcal{E}$. The tosses are independent for each pair of potential edges.
+
+We denote
+$$G_n(p) = \left\{ [n], \mathcal{E}_n(p) \right\}$$
+These graphs are called Erd\"{o}s-Reny graphs.
+
+\paragraph{Notation}
+For Erd\"{o}s-Reny graphs we write $P_{n,p}$ for probability and $\mathbb{E}_{n,p}$ for expectation.
+\paragraph{Exercise}
+$$\mathbb{E}_{n,p} \left| \mathcal{E}_{n}(p) \right| = p \binom{n}{2}$$
+\paragraph{Definition}
+Vertex $j\in [n]$ is called disconnected if its $\deg (j)= 0$.
+\paragraph{Exercise}
+What is probability that there is disconnected vertex in $G_{n}(p)$.
+\subparagraph{Solution}
+Denote $A_{j,n}$ event that $j^{th}$ node is disconnected. Then we search a probability of $\bigcup_{j=1}^n A_{j,n}$.
+$$P_{n,p} \left(\bigcup_{j=1}^n A_{j,n} \right) \leq \sum_{j=1}^n P_{n,p} (A_{j,n}) = nP_{n,p}  \left( A_{j,n} \right) = n(1-p)^{n-1}$$
+Thus, in limit
+$$\lim_{n \to \infty } P_{n,p} \left(\bigcup_{j=1}^n A_{j,n} \right)   = 0$$
+
+
+Thus we'll need to make $p$ depend on $n$ such that $\lim_{n \to \infty } p_n = 0$. We define sequence of sparse graphs
+$G_n(p_n)$ such that $p_n \to 0$.
+\paragraph{Example}
+Suppose $p_n = \frac{c}{n}$. Then
+$$P_{n,\frac{c}{n}} (A_{j,n} )= \left( 1-p_n \right)^{n-1} = \left( 1- \frac{c}{n} \right)^n \to e^{-c}$$
+Then obviously
+$$\liminf_{n \to \infty} P_{n,\frac{c}{n}}\left(\bigcup_{j=1}^n A_{j,n} \right) > 0 $$
+\paragraph{Theorem} Denote number of disconnected vertices in $G_{n,p_n}$ as $D_n$. Then $\left\{ D_n \geq 1 \right\} = \bigcup_{j=1}^n A_{j,n} $. Let $p_n = \frac{\log n + c_n}{n}$. 
+\begin{enumerate}
+	\item If $\lim_{n \to \infty} c_n = \infty$, then $\lim_{n \to \infty} P_{n,p_n} \left(D_n = 0\right) = 1$.
+	\item If $\lim_{n \to \infty} c_n = -\infty$, then 
+	$$\lim \mathbb{E}_{n,p_n} D_n = \infty$$
+	and for all $\epsilon > 0$, $$\lim_{n \to \infty} P_{n,p_n} \left(\left|\frac{D_n}{\mathbb{E}_{n,p_n}  D_n} - 1\right| > \epsilon\right) = 0$$. In particular, for all $M$ $$\lim_{n \to \infty} P_{n, p_n} \left( D_n > M \right) = 1$$ and $$\lim_{n \to \infty} P_{n,p_n} \left(D_n = 0\right) = 0$$
+
+\end{enumerate}
+
+We say that $\frac{\log n}{n}$ is threshold for the property of ''having at least one vertex disconnected``. It can be shown that the same threshold applies to connectedness of the graph.
+\subparagraph{Proof}
+Without loss of generality, $c_n = o\left(n^{\frac{1}{2}}\right)$ (if $c_n$ is larger, it obviously true). By first moment method, it's enough to show $\lim_{n \to \infty} \mathbb{E}_{n,p_n} D_n = 0$. Define $D_{j,n} = \mathds{1}_{A_{j,n}}$, then $D_n = \sum_{j=1}^n D_{j,n}$. Then
+$$\mathbb{E}_{n,p_n} D_n = \mathbb{E}_{n,p_n}  \sum_{j=1}^n D_{j,n} = n \mathbb{E}_{n,p_n} D_{1,n} = nP_{n,p_n} (A_{1,n}) = n(1-p_n)^{n-1} = n \left( 1 - \frac{\log n + c_n}{n} \right)^{n-1} $$
+Take a look at $\mathbb{E}_{n,p_n} D_{1,n} $:
+$$\mathbb{E}_{n,p_n} D_{1,n} = \left( 1 - \frac{\log n + c_n}{n} \right)^{n-1}$$
+$$\log \mathbb{E}_{n,p_n} D_{1,n} = (n-1)\log \left( 1 - \frac{\log n + c_n}{n} \right)$$
+By Taylor:
+$$\exists 0<x^{\star}<x \quad f(x) = f(0) + f'(0)x + f''(x^\star)\frac{x^2}{2} $$
+For $f(x) = \log(1-x)$:
+$$\exists 0<x^{\star}<x \quad  \log (1-x) = -x-\frac{x^2}{(1-x^\star)^2}$$
+Thus
+$$\log \mathbb{E}_{n,p_n} D_{1,n} = (n-1) \left[ -\frac{\log n + c_n}{n} - \frac{1}{(1-x^\star)^2} \left(\frac{\log n + c_n}{n}\right)^2 \right] = -\log n -c_n +o(1)$$
+That means
+$$\mathbb{E}_{n,p_n} D_{1,n} = e^{- \log n -c_n +o(1)} = \frac{1}{n}e^{-c_n} \left(1+o(1)\right)$$
+Back to total expectation
+$$\mathbb{E}_{n,p_n} D_n  = n \mathbb{E}_{n,p_n} D_{1,n} = e^{-c_n} \left(1+o(1)\right) $$
+
+Note, that this equality is right for any $c_n = o\left(n^{\frac{1}{2}}\right)$.
+\begin{enumerate}
+	\item Now suppose $\lim_{n \to \infty} c_n = \infty$, then $\mathbb{E}_{n,p_n} D_n  \to 0$.
+	\item If $\lim_{n \to \infty} c_n = -\infty$, then $\mathbb{E}_{n,p_n} D_n = e^{-c_n} \left(1+o(1)\right)  \to \infty$.
+	
+	Now we want to use second moment method and for that we need to show that $\sigma^2 (D_n) = o \left(\left( \mathbb{E}_{n,p_n} D_n\right)^2 \right)$:
+	
+	$$\sigma^2(D_n) = \mathbb{E}_{n,p_n} D_n^2 - \left( \mathbb{E} D_n\right)^2 $$
+	or
+	$$\mathbb{E}_{n,p_n} D_n^2 = \sigma^2(D_n) + \left( \mathbb{E} D_n\right)^2   $$
+	Thus we want to show
+	$$\mathbb{E}_{n,p_n} D_n^2 = (1+o(1))\left( \mathbb{E} D_n\right)^2   $$
+	
+	Since $$D_n = \sum_{j=1}^n D_{j,n}$$
+	$$D_n^2 = \sum_{j=1}^n D_{j,n}\sum_{k=1}^n D_{k,n} = \sum_{j=1}^n D_{j,n}^2 +  \sum_{\substack{1\leq j,k \leq n\\ j\neq k}}^n D_{j,n}D_{k,n} = \sum_{j=1}^n D_{j,n} +  \sum_{\substack{1\leq j,k \leq n\\ j\neq k}}^n D_{j,n}D_{k,n}$$
+	Then
+	$$\mathbb{E}_{n, p_n} D_n^2 = \mathbb{E}_{n, p_n} D_n  + n(n-1) \mathbb{E}_{n, p_n} D_{1,n}D_{2,n}$$
+	$$\mathbb{E}_{n, p_n} D_{1,n}D_{2,n} = P_{n,p_n} \left( D_{1,n} \cap D_{2,n} \right) = (1-p_n)^{n-1} \cdot (1-p_n)^{n-2} = (1-p_n)^{2n-3} = \left( 1 - \frac{\log n + c_n}{n} \right)^{2n-3}$$
+	Taking logarithm:
+	$$\log \mathbb{E}_{n, p_n} D_{1,n}D_{2,n}  = (2n-3) \log\left( 1 - \frac{\log n + c_n}{n} \right)$$
+	With similar mehtod we get
+	$$\log \mathbb{E}_{n, p_n} D_{1,n}D_{2,n} = (2n-3) \left[ -\frac{\log n + c_n}{n} - \frac{1}{(1-x^\star)^2} \left(\frac{\log n + c_n}{n}\right)^2 \right] = -2\log n -2c_n +o(1)$$
+	$$\mathbb{E}_{n, p_n} D_{1,n}D_{2,n}  = e^{-2\log n }e^{-2c_n}e^{o(1)} = \frac{1}{n^2}e^{-2c_n}(1+o(1))$$
+	back to expectation of $D_n^2$:
+	$$\mathbb{E}_{n, p_n} D_n^2 = \mathbb{E}_{n, p_n} D_n  + \frac{n(n-1)}{n^2}e^{-2c_n}(1+o(1)) = \mathbb{E}_{n, p_n} D_n  + e^{-2c_n}(1+o(1)) $$
+	$$(\mathbb{E}_{n, p_n} D_n)^2 = \left(e^{-c_n} \left(1+o(1)\right) \right)^2 = e^{-2c_n} \left(1+o(1)\right)$$
+	$$\mathbb{E}_{n, p_n} D_n^2 = e^{-c_n} \left(1+o(1)\right)  + e^{-2c_n} \left(1+o(1)\right) = e^{-2c_n} \big(e^{c_n}\left(1+o(1)\right)  + 1 + o(1)\big) = e^{-2c_n} \left(1 + o(1)\right) = (\mathbb{E}_{n, p_n} D_n)^2\left(1 + o(1)\right)$$
+\end{enumerate}
+
+\section{Center limit theorem}
+Given IID variables $\left\{ X_n \right\}_{n=1]^\infty}$. Denote
+$$\mu = \mathbb{E} X_n$$
+$$\sigma^2 = Var(X_n)$$
+
+Since 
+$$\mathbb{E} S_n = n\mu$$
+$$\mathbb{E} S_n - n\mu = 0$$
+$$Var( S_n - n\mu ) = Var(S_n) = n\sigma^2$$
+Thus
+$$\begin{cases}
+E \frac{S_n - n\mu}{\sqrt{n} \sigma} = 0\\
+Var\left( \frac{S_n - n\mu}{\sqrt{n} \sigma}\right) = \frac{1}{n\sigma^2} Var(S_n) = 1\\
+\end{cases}$$

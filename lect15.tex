@@ -1,0 +1,36 @@
+\paragraph{Example}
+$$X \sim U([0,1]) \quad Y|X \sim U([0,x])$$
+\subparagraph{Solution}
+$f_X(x) = 1 \quad 0\leq x\leq 1$ and $f_{Y|X}f_X(x)=\frac{1}{x} \quad 0\leq y \leq x$.
+Thus
+$$f(x,y) = f_X(x) f_{Y|X} (y|x) = \frac{1}{x} \quad 0\leq y \leq x \leq 1$$
+And
+$$f_Y(y) = \int_{-\infty}^{\infty} f(x,y) dx = \int_y^1 \frac{1}{x} = -\log y \quad 0\leq y \leq 1 $$
+\paragraph{Exercise}
+Find $\mathbb{E}Y$
+\subparagraph{Solution}
+$$\mathbb{E}Y = \int_0^1 y (-\log y)dy  = -\int_0^1 y\log y dy = \frac{1}{4}$$
+
+\paragraph{Linearity of expectation}
+Define $\Psi(X,Y) = X+Y$.
+
+Then
+\begin{align*}
+\mathbb{E} (X+Y) = \mathbb{E} \Psi (X,Y)= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} \Psi(x,y)f(x,y) dx dy = \int_{-\infty}^{\infty} dx x\int_{-\infty}^{\infty}  dy f(x,y) + \int_{-\infty}^{\infty}dy y\int_{-\infty}^{\infty} dx f(x,y)   =\\= \int_{-\infty}^{\infty} x f_X(x)dx + \int_{-\infty}^{\infty} y f_Y(y) dy = \mathbb{E}X +\mathbb{E}Y
+\end{align*}
+\paragraph{Sum of independent variables}
+Suppose $X,Y$ independent. 
+$$f(x,y) = f_X(x) f_Y(y)$$
+$$p(x,y) = p_X(x) p_Y(y)$$
+We denote $Z=X+Y$ and want to find $f_Z(z) = f_{X+Y}(z) = ?$
+
+\subparagraph{Discrete}
+$$p_Z(z)=p_{X+Y}(z) = P(X+Y=z) = \sum_x P(X=x, Y=z-x) \stackrel{ind}{=} \sum_x P(X=x) P(Y=z-x) = \sum_x p_x(x) p_y(z-x)$$
+\subparagraph{Continuous}
+ Denote $A_z = \left\{ (x,y) : x+y \leq z \right\}$. Then
+\begin{align*}
+F_{X+Y} (z) = P(X+Y\leq z) = P((X,Y) \in A_z) = \iint\limits_{A_z} f(x,y) dxdy = \int_{-\infty}^{\infty} dx \int_{-\infty}^{z-x} dy f(x,y) \stackrel{ind}{=}\\= \int_{-\infty}^{\infty} dx \int_{-\infty}^{z-x} dy f_X(x)f_Y(y) = \int_{-\infty}^{\infty} dx f_X(x) \int_{-\infty}^{z-x} dy f_Y(y) 
+\end{align*}
+$$$$
+Then
+$$f_{X+Y}(z) = \frac{d}{dz} \int_{-\infty}^{\infty} dx f_X(x) \int_{-\infty}^{z-x} dy f_Y(y) = \int_{-\infty}^\infty f_X(x) f_Y(z-x) dx = \left( f_X * f_Y \right)(z)$$

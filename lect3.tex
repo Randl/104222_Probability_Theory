@@ -1,0 +1,73 @@
+\paragraph{Coin experiment} Flipping coin until getting $H$:
+$$\Omega = \left\{ 1,2,\dots \right\}$$
+$$P(\left\{ n \right\}) = \left( \frac{1}{2} \right)^n$$
+$$A_n = \left\{ \parbox{1cm}{\centering \scriptsize it took n flips } \right\} = \left\{ n \right\}$$
+$$B_j = \left\{  \parbox{1cm}{\centering \scriptsize heads on $j^{th}$ flip } \right\}$$
+$$C_j = \left\{  \parbox{1cm}{\centering \scriptsize tails on $j^{th}$ flip } \right\}$$
+$\left\{ B_j \right\}_{j=1}^{\infty}$ and $\left\{ C_j \right\}_{j=1}^{\infty}$ are independent.
+$$A_n = C_1 \cup C_2 \cup \dots \cup C_{n-1} \cup B_n$$
+$$P(A_n) = P\left(C_1 \cup C_2 \cup \dots \cup C_{n-1} \cup B_n \right) = P(C_1) \cdot P(C_2) \cdot \dots \cdot P(C_{n-1}) \cdot P(B_n) = \left( \frac{1}{2} \right)^n$$
+\paragraph{Domino experiment} Taking domino out of box with 40 black and 30 white dominoes.
+$$C = \left\{ \parbox{1cm}{\centering \scriptsize black in first time } \right\} = \left\{ n \right\}$$
+$$C = \left\{ \parbox{1cm}{\centering \scriptsize black in second time } \right\} = \left\{ n \right\}$$
+$$D = \left\{ D \cap C \right\} \cup \left\{ D \cap C^C \right\}$$
+$$P(D) = P(C \cap D) + P(C^C \cup D)$$
+$$P(C \cap D) = P(C) P(D | C) = \frac{4}{7} \cdot \frac{39}{69}$$
+$$P(C^C \cap D) = P(C^C) P(D | C^C) = \frac{4}{7} \cdot \frac{40}{69}$$
+$$P(D) = P(C \cap D) + P(C^C \cap D) = \frac{4}{7} \cdot \frac{39}{69} +\frac{4}{7} \cdot \frac{40}{69} = \frac{4}{7} $$
+\subsection{Total probability}
+Suppose we have $$\bigcup_{j=1}^n A_j = \Omega$$ and $$\forall j \neq k \: A_j \cap A_k = 0$$
+We say that $\Omega$ is decomposed to $$\left\{ A_j \right\}_{j=1}^n$$
+
+Now we can write any event $B \subset \Omega$ as $$B = \bigcup_{j=1}^n \left(B \cap A_j\right) $$
+Then $$P(B) = \sum P\left(B \cap A_j\right)  $$
+
+\paragraph{Bayes' formula} 
+Suppose $\Omega$ is decomposed to $$\left\{ A_j \right\}_{j=1}^n$$. Let $B\subset \Omega$. Then
+$$P(A_i |B) = \frac{P(A_i)P(B|A_i)}{\sum_{j=1}^n P(A_j)P(B|A_j)}$$
+\subparagraph{Proof}
+$$P(A_i | B) = \frac{P(A_i \cup B)}{P(B)} = \frac{P(A_i \cap B)}{\sum_{j=1}^n P(B \cap A_j)} = \frac{P(A_i) P( B|A_i)}{\sum_{j=1}^n P(A_j) P( B|A_j)}  $$
+
+\paragraph{Exercise} In college, $70\%$ of people are students, and $30\%$ are stuff. It's known that $80\%$ of stuff and $20\%$ of students come to college by car. We choose a random person and he came by car. What is probability he's a student.
+\subparagraph{Solution}
+$$S = \left\{ \parbox{1cm}{\centering \scriptsize we choose a student } \right\} = \left\{ n \right\}$$
+$$W = \left\{ \parbox{1cm}{\centering \scriptsize we choose a stuff } \right\} = \left\{ n \right\}$$
+$$C = \left\{ \parbox{1cm}{\centering \scriptsize came by car } \right\} = \left\{ n \right\}$$
+We need to find $P(S|C)$.
+$\Omega = S \cup W$. By Bayes' formula:
+$$P(S|C) = \frac{P(S) \cdot P(C|S)}{P(S)\cdot P(C|S) + P(W)\cdot P(C|W)} = \frac{0.7 \cdot 0.2}{0.7\cdot 0.2 + 0.3 \cdot 0.8} = \frac{0.14}{0.38} = \frac{7}{19}$$
+
+\section{Probability via combinatorics}
+\paragraph{Proof} If in probability experiment there are $n$ outcomes ($|\Omega| = n$) and they are equally probable, than $$\forall A \subset \Omega \: P(A) = \frac{|A|}{|\Omega|}$$
+
+\paragraph{Exercise} What is probability to get exactly 2 aces in poker hand?
+\subparagraph{Solution}
+
+$$P(A) = \frac{\binom{4}{2} \cdot \binom{48}{3}}{\binom{52}{5}}$$
+\paragraph{Exercise} What is probability to get at least 3 aces in poker hand?
+\subparagraph{Solution}
+
+$$P(A) = \frac{\binom{4}{3} \cdot \binom{48}{2} +\binom{4}{4} \cdot \binom{48}{1} }{\binom{52}{5}}$$
+\paragraph{Exercise} What is probability to get a full house in poker hand?
+\subparagraph{Solution}
+
+$$P(A) = \frac{\binom{13}{1}  \cdot \binom{4}{3} \cdot \binom{12}{1} \cdot \binom{4}{2} }{\binom{52}{5}}$$
+
+
+\paragraph{Exercise} What is probability to put $n$ balls in $n$ boxes such that exactly one box is empty?
+\subparagraph{Solution}
+We choose one box which is empty, and one additional which contains to balls.
+$$P(A) = \frac{ n \cdot (n-1) \cdot \binom{n}{2} (n-2)! }{n^n}$$
+\paragraph{Exercise} What is probability to put $n$ balls in $n$ boxes such that at least one box is empty?
+\subparagraph{Solution}
+$$A = \left\{ \parbox{1cm}{\centering \scriptsize at least one empty } \right\} = \left\{ n \right\}$$
+$$A^C  = \left\{ \parbox{1cm}{\centering \scriptsize no empty boxes} \right\} = \left\{ n \right\}$$
+$$P(A) = 1 - \frac{n! }{n^n}$$
+
+Using Stirling approximation $n \approx n^n e^{-n} \sqrt{2\pi n}$
+$$\frac{n!}{n^n} =\approx e^{-n} \cdot \sqrt{2\pi n}$$
+
+\subsection{Multinomial coefficients}
+Given $n$ balls and $k$ boxes and $\left\{ r_j \right\}_{j=1}^n$, $\sum r_j = n$. How many ways there are to put $r_j$ in $j^{th}$ box.
+$$\binom{n}{r_1}\binom{n-r_1}{r_2} \dots \binom{r_{n-1}+r_n}{r_{n-1}}\binom{r_n}{r_n} = \frac{n!}{r_1!r_2!\dots r_n!}$$
+There $k^n$ different ways to put $n$ balls into $k$ boxes, thus to get probability we need to divide first by second.

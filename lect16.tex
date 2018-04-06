@@ -1,0 +1,71 @@
+\subsection{Law of total expectation (smoothing theorem)}
+Denote $h(x) = \mathbb{E}(Y|X=x)$. Then what is $\mathbb{E} h(X)$?
+\begin{align*}
+\mathbb{E} h(X) = \int_{-\infty}^{\infty} h(x) f_X(x) dx = \int_{-\infty}^\infty f_X(x) \left[\int_{-\infty}^\infty yf_{Y|X} (y|x) dy  \right]dx = \int_{-\infty}^\infty\int_{-\infty}^\infty f_X(x) y f_{Y|X} (y|x) dydx =\\= \int_{-\infty}^\infty\int_{-\infty}^\infty f_X(x) y \frac{f(x,y)}{f_X(x)}dydx = \int_{-\infty}^\infty y \int_{-\infty}^\infty  f(x,y)dxdy =  \int_{-\infty}^\infty y  f_y(y) dy = \mathbb{E} Y
+\end{align*}
+We denote 
+$$h(X) = E(Y|X)$$
+\paragraph{Example}
+$$X \sim [0,1]$$
+$$Y|X \sim [0, x]$$
+$$h(x) = \mathbb{E}(Y|X=x)=\frac{x}{2}$$
+$$\mathbb{E}(Y) = \mathbb{E} h(X) = \frac{1}{4}$$
+\paragraph{Example}
+Suppose we choose random point $(X,Y)$ on unitary disk.
+Denote $R = \sqrt{X^2+Y^2}$ and $f_{R,X}$ density of vector $(R,X)$. Find $f_{R,X}$.
+\subparagraph{Solution}
+We have
+$$f_{X,Y} = \frac{1}{\pi} \quad x^2+y^2 < 1$$
+Now, we want first to find
+$$F_{R,X} (r,x) = P(R \leq r, X \leq x)$$
+we can limit $0\leq r \leq 1$ and $0\leq x \leq 1$.
+Define
+$$A_{r,x} = \left\{ \left( x^\prime, y^\prime \right): \left(x^\prime\right)^2 + (y^\prime)^2 \leq r^2 , x^\prime \leq x \right\}$$
+$$P\left(X^2+Y^2 \leq r^2, X \leq x  \right) = P((X,Y) \in A_{r,x}) = \iint\limits_{A_{r,x}} f_{X,Y} (x,y) dxdy = \frac{1}{\pi} \iint\limits_{A_{r,x}}  dxdy $$
+Denote
+$$A_{r,x}^{(1)} = \left\{ \left( x^\prime, y^\prime \right)\in A_{r,x} : x^\prime \leq 0 \right\}$$
+and
+$$A_{r,x}^{(2)} = A_{r,x}-A_{r,x}^{(1)}$$
+$$P\left(X^2+Y^2 \leq r^2, X \leq x  \right)  = \frac{1}{\pi} \iint\limits_{A_{r,x}}  dxdy  = \frac{1}{\pi} \iint\limits_{A^{(1)}_{r,x}}  dxdy +\frac{1}{\pi} \iint\limits_{A^{(2)}_{r,x}}  dxdy = \frac{r^2}{2}+\frac{1}{\pi} \iint\limits_{A^{(2)}_{r,x}}  dxdy$$
+Now
+$$\iint\limits_{A^{(2)}_{r,x}}  dxdy = 2 \int_{0}^{x} (r^2 - (x^\prime)^2) ^{\frac{1}{2}} dx^\prime$$
+Thus
+$$F_{R,X} (r,x) = \frac{r^2}{2}+ \frac{2}{\pi} \int_{0}^{x} (r^2 - (x^\prime)^2)^{\frac{1}{2}} dx^\prime$$
+$$\frac{\partial F_{R,X} }{\partial x} =\frac{2}{\pi}(r^2 - x^2)^{\frac{1}{2}}$$
+$$f_{R,X} (r,x) = \frac{\partial^2 F_{R,X} }{\partial xr} = \frac{\partial }{\partial r}  \frac{2}{\pi}(r^2 - x^2)^{\frac{1}{2}}  =\frac{2r}{\pi}(r^2 - x^2)^{-\frac{1}{2}} =\frac{2r}{\pi(r^2 - x^2)^{\frac{1}{2}} }$$
+
+\paragraph{Claim}
+For independent $X$ and $Y$
+$$\mathbb{E} \Phi(X) \Psi(Y) = \mathbb{E} \Phi(X) \mathbb{E}\Psi(Y)  $$
+if $\mathbb{E} \Phi(X) \Psi(Y) < \infty$.
+\subparagraph{Proof}
+$$\mathbb{E} \Phi(X) \Psi(Y) = \sum_{x,y} \Phi(x)\Psi(y) p(x,y) = \sum_{x,y} \Phi(x)\Psi(y) p_X(x) p_Y(y)  = \sum_{x} \Phi(x) p_X(x) \sum_y\Psi(y)p_Y(y)  = \mathbb{E} \Phi(X) \mathbb{E}\Psi(Y)  $$
+\paragraph{Claim} 
+For independent $X$ and $Y$ $$M_{X+Y} (t) = M_X(t) M_Y(t)$$
+\subparagraph{Proof}
+$$M_{X+Y}(t) = \mathbb{E}e^{t(X+Y)} = \mathbb{E}e^{tX} e^{tY} = \mathbb{E}e^{tX}\mathbb{E} e^{tY} = M_X(t) M_Y(t)$$
+\paragraph{Claim}
+
+For independent $X$ and $Y$
+$$\sigma^2(X+Y) = \sigma^2 (X) + \sigma^2(Y)$$
+\subparagraph{Proof}
+\begin{align*}
+\sigma^2 (X+Y) = \mathbb{E}(X+Y-\mathbb{E}(X+Y))^2 = \mathbb{E} \left(X+Y-\mathbb{E}X - \mathbb{E} Y\right)^2 =  \mathbb{E} \left(X-\mathbb{E}X+Y - \mathbb{E} Y\right)^2 =\\=  \mathbb{E} (X-\mathbb{E}X)^2 +(Y - \mathbb{E} Y)^2 + 2 \mathbb{E}(X-\mathbb{E}X)(Y-\mathbb{E}Y)  = \mathbb{E} (X-\mathbb{E}X)^2 +(Y - \mathbb{E} Y)^2 = \sigma^2(X) + \sigma^2(Y)  + 2 \mathbb{E}(X-\mathbb{E}X)\mathbb{E}(Y-\mathbb{E}Y)
+\end{align*}
+\subsection{Indicator random variable}
+Let $\left\{ Y_j \right\}_{j=1}^n$ independent identically distributed (IID) random variables such that $P(Y_j=1)=p$ and $P(Y_i=0) =1-p$ (i.e. $Y_j \sim Ber(p)$). Denote $B(n,p) \sim X = \sum_{j=1}^n Y_j$.
+
+Lets find $\mathbb{E}X$:
+$$\mathbb{E}X = \mathbb{E} \sum_{j=1}^n Y_j = n\mathbb{E} Y = np $$
+$$\sigma^2(Y) = \mathbb{E} \left(Y - \mathbb{E}Y\right)^2 = \mathbb{E} \left(Y - p\right)^2 = (0-p)^2(1-p) + (1-p)^2p = p^2(1-p) + (1-p)^2 p = p(1-p)$$
+$$\sigma^2(X) = \mathbb{E}X = \sigma^2 \left(\sum_{j=1}^n Y_j  \right)  = n \sigma^2 \left(Y\right) = np(1-P) $$
+\paragraph{Example}
+Suppose there are $n$ pairs of shoes and $m$ of shoes are bad. What is expectation of number of pairs of good shoes?
+\subparagraph{Example}
+Denote $Y_i = \begin{cases}
+1, &\text{good pair}\\
+0,&\text{bad pair}
+\end{cases}$
+Then $\mathbb{E}X = \mathbb{E} \sum_j Y_j$.
+$$P(Y_j = 1) = \frac{\binom{2n-2}{m}}{\binom{2n}{m}} = \frac{(2n-m)(2n-m-1)}{2n(2n-1)}$$
+$$\mathbb{E}X = \mathbb{E} \sum_j Y_j = n \mathbb{E} Y_j = n\frac{(2n-m)(2n-m-1)}{2n(2n-1)} = \frac{(2n-m)(2n-m-1)}{2(2n-1)}  $$

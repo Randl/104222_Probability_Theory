@@ -1,0 +1,24 @@
+It can be shown that $x = \mu \pm \sigma$ are inflection point.
+
+$$F(x) = \int_{-\infty}^{x} \frac{e^{-\frac{(y-\mu)^2}{2\sigma^2}}}{\sqrt{2\pi} \sigma} dy$$
+
+Lets denote $Z \sim N(0,1)$ is standard distribution. Canonical substitution   $z = \frac{x-\mu}{\sigma}$:
+For $\mu \in \mathbb{R}$ and $\sigma^2 >0 $, we can show $P(\mu + a \sigma \leq X \leq \mu + b \sigma)$ is independent on $a$ and $b$:
+$$P(\mu + a \sigma \leq X \leq \mu + b \sigma) = \int_{\mu + a \sigma}^{\mu + b \sigma} \frac{e^{-\frac{(x-\mu)^2}{2\sigma^2}}}{\sqrt{2\pi} \sigma} dx = \int_{a}^{b} \frac{e^{-\frac{z^2}{2}}}{\sqrt{2\pi} } dx = P(a\leq Z \leq b)$$
+
+\paragraph{Conclusion}
+$$\frac{X_{\mu, \sigma^2} - \mu}{\sigma} = Z$$
+
+\paragraph{Claim}
+Suppose $X$ random variable such that $\exists a,b \quad -\infty \leq a < b \leq  \infty$ $\forall x \notin [a,b] \quad f_X(x) = 0$ .
+
+Let $\Psi : [a,b] \to \mathbb{R}$ continuous, monotonous, piecewise continuously differentiable. Define $Y = \Psi(X)$, then $Y$ is continuous random variable and
+$$f_Y(y) = \frac{f_X(x)}{|\Psi^\prime (x)|} =\frac{f_X(\Psi^{-1}(y))}{|\Psi^\prime (\Psi^{-1}(y))|}  $$ 
+\subparagraph{Proof}
+Without loss of generality, $\Psi$ is decreasing.
+$$F_Y(y) = P(Y \leq y)  = P(\Psi(X) \leq y) = P(X \geq \Psi^{-1}(y))  = 1 - P(X \leq \Psi^{-1}(y)) = 1 -  F_X(\Psi^{-1}(y)) = 1 - F_X(\Psi^{-1}(y))$$
+Thus
+$$f_Y(y) = F_Y^\prime(y) = -(F_X(\Psi^{-1}(y))) = -F^\prime_X(\Psi^{-1}(y)) \cdot \left( \Psi^{-1}(y) \right)^\prime$$
+
+Since $\left(\Psi^{-1}\right)^\prime(y) = \frac{1}{\Psi^\prime (\Psi^{-1}(y))}$:
+$$f_Y(y) = -f_X (\Psi^{-1}(y)) \cdot\frac{1}{\Psi^\prime (\Psi^{-1}(y))} = \frac{f_X(x)}{|\Psi^\prime(x)|} $$
